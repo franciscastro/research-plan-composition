@@ -1,0 +1,41 @@
+[5] control for quality
+
+[1] One concern about crowdsourcing studies using infrastructures like
+Mechanical Turk is the usefulness of the collected data since user
+diversity, unknown experience, and people who “game” the system
+may impact the response quality
+
+[1] To mitigate the likelihood of participants “gaming” the system by
+answering the HITs haphazardly, we required a qualification test,
+which undoubtedly limited participation
+
+[2] It is an attractive platform for
+researchers because it provides quick, easy access to a large
+workforce willing to receive a small monetary compensation for
+their time
+
+[2] Since workers are sampled from all over the globe,
+Mechanical Turk studies have the benefit of generalizing to varied
+populations more than samples from limited geographic diversity
+that are more common in traditional recruiting methods
+
+[3] MTurk allows participants to self-select into HITs given that they
+meet certain qualifications.
+
+-----------------------------------------------------------------------------
+
+
+
+
+[VIABILITY]
+MTurk has been used to recruit participants for programming-related research:
+a. Study on programming experience and code search habits [5]
+b. Study on the impact of coding practices on users' preference and udnerstandability of web mashups [1]
+c. Study on how personified feedback impacts the motivation of self-described novice programmers [2]
+d. Determine how integrated, explicit assessments in an educational computing game affects engagement and task completion speed in self-directed learners [3]
+e. Understand self-reported non-programmer adults’ attitudes toward computer programming and how these can be improved [4]
+
+[APPEAL]
+The MTurk platform appeals to researchers for participant recruitment because:
+a. it provides a quick and easy access to a potentially large workforce pool in exchange for a small monetary compensation for each participant [2, 3, 5]
+b. it has the potential benefit of generalizing to varied populations [2]

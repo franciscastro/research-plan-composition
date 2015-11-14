@@ -1,0 +1,103 @@
+can you look around for any literature that talks about whether Mechanical
+Turk is useful for recruiting programmers? What about other similar
+crowdsourcing sites?
+
+-----------------------------------------------------------------------------
+[5]
+Solving the Search for Source Code
+KATHRYN T. STOLEE, Iowa State University
+SEBASTIAN ELBAUM and DANIEL DOBOS, University of Nebraska-Lincoln
+
+We targeted two populations with this survey: students in two undergraduate
+classes at the University of Nebraska-Lincoln and workers on Mechanical
+Turk. Mechanical Turk [2010] is a service hosted by Amazon that allows people to
+reach and compensate others to complete tasks that require human input, such as
+tagging images or answering survey questions. It hosts the tasks, manages payment,
+and makes the tasks accessible to a large and existing workforce. With the Mechanical
+Turk population, we delivered the survey with four programming questions that
+required potential participants to analyze the behavior of simple Java methods. Correct
+responses were required for two or more questions in order for respondents to
+participate, as a means to control for quality.
+In total, we received valid responses from 99 participants.4 Of those, 42 came from
+junior/senior undergraduate classes at UNL while the remaining 57 came from Mechanical
+Turk. In a question about programming experience, 17 had less than two
+years of experience, 53 had between two and five years of experience, and 29 had more
+than five years of programming experience.
+
+-----------------------------------------------------------------------------
+[1]
+Exploring the Use of Crowdsourcing to Support Empirical
+Studies in Software Engineering
+Kathryn T. Stolee, Sebastian Elbaum
+
+One concern about crowdsourcing studies using infrastructures like
+Mechanical Turk is the usefulness of the collected data since user
+diversity, unknown experience, and people who “game” the system
+may impact the response quality [7]. Since Amazon anonymizes
+participant identities, it is also difficult to control for certain aspects
+of the population, such as age, gender, and education or training
+level, which makes other forms of screening participants par-
+ticularly important. The use of a qualification test that asks such
+questions can mitigate this risk, but possibly at the cost of reduced
+participation, since the user is not rewarded to complete the qualification
+test and risks not passing.
+To mitigate the likelihood of participants “gaming” the system by
+answering the HITs haphazardly, we required a qualification test,
+which undoubtedly limited participation but allotted us some control
+over the users we were hiring, and asked users to justify their
+HIT responses using a textual response of at least 10 words. We
+expected for the textual responses to allow us to reject inadequate
+submissions, but that never occurred. However, this additional data
+helped us to better understand the users’ thought processes when
+completing the HITs. Among the open-ended textual responses,
+the average number of words was over 31. We found the explanations
+detailed and in general demonstrating a good understanding
+of the questions. When the quantitative answers were homogenous
+for a HIT, the open-ended answers served as confirmation that the
+participants had an understanding of what we were asking. When
+the quantitative answers were dissimilar, the open-ended answers
+helped us understand points of confusion and why the participants
+differed. We could also tell when the user misunderstood the question
+or did not understand the task. These benefits helped us better
+understand the data and see that in some cases, an odd answer was
+the result of a misinterpretation of the question.
+
+-----------------------------------------------------------------------------
+[2]
+Personifying Programming Tool Feedback
+Improves Novice Programmersʼ Learning
+Michael J. Lee and Andrew J. Ko
+
+To recruit these individuals, we used
+Amazon.com’s Mechanical Turk, an online marketplace where
+individuals can receive micro-payments for doing small tasks called
+Human Intelligence Tests (HITs). It is an attractive platform for
+researchers because it provides quick, easy access to a large
+workforce willing to receive a small monetary compensation for
+their time [46]. Since workers are sampled from all over the globe,
+Mechanical Turk studies have the benefit of generalizing to varied
+populations more than samples from limited geographic diversity
+that are more common in traditional recruiting methods [26].
+However, due to the nature of the low monetary compensation and
+anonymity of the workers, careful consideration has to be taken to
+ensure that participants are not “gaming the system” [13,26]. To
+address this, we required that participants complete at least one level
+to receive credit for the HIT, ensuring that they actually had to
+interact with Gidget and the code before being allowed to quit.
+
+-----------------------------------------------------------------------------
+[3]
+In-Game Assessments Increase Novice Programmers’
+Engagement and Level Completion Speed
+Michael J. Lee, Andrew J. Ko, and Irwin Kwan
+
+Our study has several limitations that limit its generalizability. First,
+MTurk allows participants to self-select into HITs given that they
+meet certain qualifications. Our HIT only required that participants
+were living in the USA and had no programming experience.
+Additionally, filtering HITs for certain payouts or tags could have
+affected participant recruitment. These limitations introduce a
+sampling bias, which may limit the generalizability of our results to
+the particular populations found on MTurk.
+
+-----------------------------------------------------------------------------
