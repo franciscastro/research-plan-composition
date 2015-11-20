@@ -28,76 +28,88 @@ ob2 = phr( "Mike Clark", 1.6, 97.94, 64 )
 ob3 = phr( "Brittany Young", 1.44, 86.4, 97 )
 
 
+#########################
+# Oracle for BMI Sorter #
+#########################
+
+fun bmi-oracle(bmi1 :: Report, bmi2 :: Report): -> Boolean
+	bmi1.under.sort() = bmi2.under.sort() and
+	bmi1.healthy.sort() = bmi2.healthy.sort() and
+	bmi1.over.sort() = bmi2.over.sort() and
+	bmi1.obese.sort() = bmi2.obese.sort()
+end
+
+
 ##################
 # The BMI Sorter #
 ##################
 
 check "All categories": 
-	bmi-report([list: ob3, ov3, n3, u3, u1, n1, n2, ov1, ob1, u2, ob2, ov2 ]) is bmi-summary([list: "Eugene Cannon", "Ray Cox", "Toni Lane"], [list: "Matty Ward", "Dwight Pierce", "Shannon Sully"], [list: "Carla Stokes", "Gretchen Johnston", "Charlie Morris"], [list: "Kristi Long", "Mike Clark", "Brittany Young"])
+	bmi-oracle(bmi-report([list: ob3, ov3, n3, u3, u1, n1, n2, ov1, ob1, u2, ob2, ov2 ]), bmi-summary([list: "Eugene Cannon", "Ray Cox", "Toni Lane"], [list: "Matty Ward", "Dwight Pierce", "Shannon Sully"], [list: "Carla Stokes", "Gretchen Johnston", "Charlie Morris"], [list: "Kristi Long", "Mike Clark", "Brittany Young"])) is true
 end
 
 check "Just underweight":
-	bmi-report([list: u3, u1, u2 ]) is bmi-summary([list: "Eugene Cannon", "Ray Cox", "Toni Lane"], empty, empty, empty)
+	bmi-oracle(bmi-report([list: u3, u1, u2 ]), bmi-summary([list: "Eugene Cannon", "Ray Cox", "Toni Lane"], empty, empty, empty)) is true
 end
 
 check "Just normal":
-	bmi-report([list: n3, n1, n2 ]) is bmi-summary(empty, [list: "Matty Ward", "Dwight Pierce", "Shannon Sully"], empty, empty)
+	bmi-oracle(bmi-report([list: n3, n1, n2 ]), bmi-summary(empty, [list: "Matty Ward", "Dwight Pierce", "Shannon Sully"], empty, empty)) is true
 end
 
 check "Just overweight":
-	bmi-report([list: ov3, ov1, ov2 ]) is bmi-summary(empty, empty, [list: "Carla Stokes", "Gretchen Johnston", "Charlie Morris"], empty)
+	bmi-oracle(bmi-report([list: ov3, ov1, ov2 ]), bmi-summary(empty, empty, [list: "Carla Stokes", "Gretchen Johnston", "Charlie Morris"], empty)) is true
 end
 
 check "Just obese":
-	bmi-report([list: ob3, ob1, ob2 ]) is bmi-summary(empty, empty, empty, [list: "Kristi Long", "Mike Clark", "Brittany Young"])
+	bmi-oracle(bmi-report([list: ob3, ob1, ob2 ]), bmi-summary(empty, empty, empty, [list: "Kristi Long", "Mike Clark", "Brittany Young"])) is true
 end
 
 check "All but underweight":
-	bmi-report([list: ob3, ov3, n3, n1, n2, ov1, ob1, ob2, ov2 ]) is bmi-summary(empty, [list: "Matty Ward", "Dwight Pierce", "Shannon Sully"], [list: "Carla Stokes", "Gretchen Johnston", "Charlie Morris"], [list: "Kristi Long", "Mike Clark", "Brittany Young"])
+	bmi-oracle(bmi-report([list: ob3, ov3, n3, n1, n2, ov1, ob1, ob2, ov2 ]), bmi-summary(empty, [list: "Matty Ward", "Dwight Pierce", "Shannon Sully"], [list: "Carla Stokes", "Gretchen Johnston", "Charlie Morris"], [list: "Kristi Long", "Mike Clark", "Brittany Young"])) is true
 end
 
 check "All but normal":
-	bmi-report([list: ob3, ov3, u3, u1, ov1, ob1, u2, ob2, ov2 ]) is bmi-summary([list: "Eugene Cannon", "Ray Cox", "Toni Lane"], empty, [list: "Carla Stokes", "Gretchen Johnston", "Charlie Morris"], [list: "Kristi Long", "Mike Clark", "Brittany Young"])
+	bmi-oracle(bmi-report([list: ob3, ov3, u3, u1, ov1, ob1, u2, ob2, ov2 ]), bmi-summary([list: "Eugene Cannon", "Ray Cox", "Toni Lane"], empty, [list: "Carla Stokes", "Gretchen Johnston", "Charlie Morris"], [list: "Kristi Long", "Mike Clark", "Brittany Young"])) is true
 end
 
 check "All but overweight":
-	bmi-report([list: ob3, n3, u3, u1, n1, n2, ob1, u2, ob2 ]) is bmi-summary([list: "Eugene Cannon", "Ray Cox", "Toni Lane"], [list: "Matty Ward", "Dwight Pierce", "Shannon Sully"], empty, [list: "Kristi Long", "Mike Clark", "Brittany Young"])
+	bmi-oracle(bmi-report([list: ob3, n3, u3, u1, n1, n2, ob1, u2, ob2 ]), bmi-summary([list: "Eugene Cannon", "Ray Cox", "Toni Lane"], [list: "Matty Ward", "Dwight Pierce", "Shannon Sully"], empty, [list: "Kristi Long", "Mike Clark", "Brittany Young"])) is true
 end
 
 check "All but obese":
-	bmi-report([list: ov3, n3, u3, u1, n1, n2, ov1, u2, ov2 ]) is bmi-summary([list: "Eugene Cannon", "Ray Cox", "Toni Lane"], [list: "Matty Ward", "Dwight Pierce", "Shannon Sully"], [list: "Carla Stokes", "Gretchen Johnston", "Charlie Morris"], empty)
+	bmi-oracle(bmi-report([list: ov3, n3, u3, u1, n1, n2, ov1, u2, ov2 ]), bmi-summary([list: "Eugene Cannon", "Ray Cox", "Toni Lane"], [list: "Matty Ward", "Dwight Pierce", "Shannon Sully"], [list: "Carla Stokes", "Gretchen Johnston", "Charlie Morris"], empty)) is true
 end
 
 check "Underweight and normal only":
-	bmi-report([list: n3, u3, u1, n1, n2 ]) is bmi-summary([list: "Eugene Cannon", "Ray Cox", "Toni Lane"], [list: "Matty Ward", "Dwight Pierce", "Shannon Sully"], empty, empty)
+	bmi-oracle(bmi-report([list: n3, u3, u1, n1, n2 ]), bmi-summary([list: "Eugene Cannon", "Ray Cox", "Toni Lane"], [list: "Matty Ward", "Dwight Pierce", "Shannon Sully"], empty, empty)) is true
 end
 
 check "Underweight and overweight only":
-	bmi-report([list: ov3, u3, u1, ov1, u2, ov2 ]) is bmi-summary([list: "Eugene Cannon", "Ray Cox", "Toni Lane"], empty, [list: "Carla Stokes", "Gretchen Johnston", "Charlie Morris"], empty)
+	bmi-oracle(bmi-report([list: ov3, u3, u1, ov1, u2, ov2 ]), bmi-summary([list: "Eugene Cannon", "Ray Cox", "Toni Lane"], empty, [list: "Carla Stokes", "Gretchen Johnston", "Charlie Morris"], empty)) is true
 end
 
 check "Underweight and obese only":
-	bmi-report([list: ob3, u3, u1, ob1, u2, ob2 ]) is bmi-summary([list: "Eugene Cannon", "Ray Cox", "Toni Lane"], empty, empty, [list: "Kristi Long", "Mike Clark", "Brittany Young"])
+	bmi-oracle(bmi-report([list: ob3, u3, u1, ob1, u2, ob2 ]), bmi-summary([list: "Eugene Cannon", "Ray Cox", "Toni Lane"], empty, empty, [list: "Kristi Long", "Mike Clark", "Brittany Young"])) is true
 end
 
 check "Normal and overweight only":
-	bmi-report([list: ov3, n3, n1, n2, ov1, ov2 ]) is bmi-summary(empty, [list: "Matty Ward", "Dwight Pierce", "Shannon Sully"], [list: "Carla Stokes", "Gretchen Johnston", "Charlie Morris"], empty)
+	bmi-oracle(bmi-report([list: ov3, n3, n1, n2, ov1, ov2 ]), bmi-summary(empty, [list: "Matty Ward", "Dwight Pierce", "Shannon Sully"], [list: "Carla Stokes", "Gretchen Johnston", "Charlie Morris"], empty)) is true
 end
 
 check "Normal and obese only":
-	bmi-report([list: ob3, n3, n1, n2, ob1, ob2 ]) is bmi-summary(empty, [list: "Matty Ward", "Dwight Pierce", "Shannon Sully"], empty, [list: "Kristi Long", "Mike Clark", "Brittany Young"])
+	bmi-oracle(bmi-report([list: ob3, n3, n1, n2, ob1, ob2 ]), bmi-summary(empty, [list: "Matty Ward", "Dwight Pierce", "Shannon Sully"], empty, [list: "Kristi Long", "Mike Clark", "Brittany Young"])) is true
 end
 
 check "Obese and overweight only":
-	bmi-report([list: ob3, ov3, ov1, ob1, ob2, ov2 ]) is bmi-summary(empty, empty, [list: "Carla Stokes", "Gretchen Johnston", "Charlie Morris"], [list: "Kristi Long", "Mike Clark", "Brittany Young"])
+	bmi-oracle(bmi-report([list: ob3, ov3, ov1, ob1, ob2, ov2 ]), bmi-summary(empty, empty, [list: "Carla Stokes", "Gretchen Johnston", "Charlie Morris"], [list: "Kristi Long", "Mike Clark", "Brittany Young"])) is true
 end
 
 check "One of each":
-	bmi-report([list: u1, n1, ov1, ob1 ]) is bmi-summary([list: "Eugene Cannon"], [list: "Matty Ward"], [list: "Carla Stokes"], [list: "Kristi Long"])
+	bmi-oracle(bmi-report([list: u1, n1, ov1, ob1 ]), bmi-summary([list: "Eugene Cannon"], [list: "Matty Ward"], [list: "Carla Stokes"], [list: "Kristi Long"])) is true
 end
 
 check "Empty list as input":
-	bmi-report(empty) is bmi-summary(empty, empty, empty, empty)
+	bmi-oracle(bmi-report(empty), bmi-summary(empty, empty, empty, empty)) is true
 end
 
 
