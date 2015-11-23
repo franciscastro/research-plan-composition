@@ -32,11 +32,11 @@ ob3 = phr( "Brittany Young", 1.44, 86.4, 97 )
 # Oracle for BMI Sorter #
 #########################
 
-fun bmi-oracle(bmi1 :: Report, bmi2 :: Report): -> Boolean
-	bmi1.under.sort() = bmi2.under.sort() and
-	bmi1.healthy.sort() = bmi2.healthy.sort() and
-	bmi1.over.sort() = bmi2.over.sort() and
-	bmi1.obese.sort() = bmi2.obese.sort()
+fun bmi-oracle(bmi1, bmi2):
+	(bmi1.under.sort() == bmi2.under.sort()) and
+	(bmi1.healthy.sort() == bmi2.healthy.sort()) and
+	(bmi1.over.sort() == bmi2.over.sort()) and
+	(bmi1.obese.sort() == bmi2.obese.sort())
 end
 
 
