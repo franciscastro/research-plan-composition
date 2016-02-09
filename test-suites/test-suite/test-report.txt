@@ -1,0 +1,135 @@
+zphyo - hw4
+
+Total Points Earned
+Theme: Java Programming, Earned Points: 100, Total Available Points: 196
+
+Our tests on your code:
+Name: dailyMaxForMonth - Empty Input Solution 1; Result: PASSED
+Theme: Java Programming; Worth: 2; Earned: 2
+Description:
+ No values in input list
+
+Name: dailyMaxForMonth - Empty Input Solution 2; Result: PASSED
+Theme: Java Programming; Worth: 2; Earned: 2
+Description:
+ No values in input list
+
+Name: dailyMaxForMonth - No Day Skips 1 Solution 1; Result: FAILED
+Theme: Java Programming; Worth: 2; Earned: 0
+Description:
+ Input is in same month
+
+Name: dailyMaxForMonth - No Day Skips 1 Solution 2; Result: FAILED
+Theme: Java Programming; Worth: 2; Earned: 0
+Description:
+ Input is in same month
+
+Name: dailyMaxForMonth - No Day Skips 2 Solution 1; Result: FAILED
+Theme: Java Programming; Worth: 2; Earned: 0
+Description:
+ Input not in same month
+
+Name: dailyMaxForMonth - No Day Skips 2 Solution 2; Result: FAILED
+Theme: Java Programming; Worth: 2; Earned: 0
+Description:
+ Input not in same month
+
+Name: dailyMaxForMonth - No Day Skips 3 Solution 1; Result: PASSED
+Theme: Java Programming; Worth: 2; Earned: 2
+Description:
+ Input doesn't contain requested month
+
+Name: dailyMaxForMonth - No Day Skips 3 Solution 2; Result: PASSED
+Theme: Java Programming; Worth: 2; Earned: 2
+Description:
+ Input doesn't contain requested month
+
+Name: dailyMaxForMonth - No Day Skips 4 Solution 1; Result: FAILED
+Theme: Java Programming; Worth: 2; Earned: 0
+Description:
+ Highest value is 0 (part 1)
+
+Name: dailyMaxForMonth - No Day Skips 4 Solution 2; Result: FAILED
+Theme: Java Programming; Worth: 2; Earned: 0
+Description:
+ Highest value is 0 (part 1)
+
+Name: dailyMaxForMonth - No Day Skips 5 Solution 1; Result: FAILED
+Theme: Java Programming; Worth: 2; Earned: 0
+Description:
+ Highest value is 0 (part 2)
+
+Name: dailyMaxForMonth - No Day Skips 5 Solution 2; Result: FAILED
+Theme: Java Programming; Worth: 2; Earned: 0
+Description:
+ Highest value is 0 (part 2)
+
+Name: dailyMaxForMonth - One Entry 1 Solution 1; Result: FAILED
+Theme: Java Programming; Worth: 2; Earned: 0
+Description:
+ Month is in input
+
+Name: dailyMaxForMonth - One Entry 1 Solution 2; Result: FAILED
+Theme: Java Programming; Worth: 2; Earned: 0
+Description:
+ Month is in input
+
+Name: dailyMaxForMonth - One Entry 2 Solution 1; Result: PASSED
+Theme: Java Programming; Worth: 2; Earned: 2
+Description:
+ Month is not in input
+
+Name: dailyMaxForMonth - One Entry 2 Solution 2; Result: PASSED
+Theme: Java Programming; Worth: 2; Earned: 2
+Description:
+ Month is not in input
+
+Name: dailyMaxForMonth - With Day Skips 1 Solution 1; Result: FAILED
+Theme: Java Programming; Worth: 2; Earned: 0
+Description:
+ Input is in same month
+
+Name: dailyMaxForMonth - With Day Skips 1 Solution 2; Result: FAILED
+Theme: Java Programming; Worth: 2; Earned: 0
+Description:
+ Input is in same month
+
+Name: dailyMaxForMonth - With Day Skips 2 Solution 1; Result: FAILED
+Theme: Java Programming; Worth: 2; Earned: 0
+Description:
+ Input not in same month
+
+Name: dailyMaxForMonth - With Day Skips 2 Solution 2; Result: FAILED
+Theme: Java Programming; Worth: 2; Earned: 0
+Description:
+ Input not in same month
+
+Name: dailyMaxForMonth - With Day Skips 3; Result: FAILED
+Theme: Java Programming; Worth: 2; Earned: 0
+Description:
+ More than 2 day skips
+
+Name: dailyMaxForMonth - With Day Skips 3; Result: FAILED
+Theme: Java Programming; Worth: 2; Earned: 0
+Description:
+ More than 2 day skips
+
+Name: dailyMaxForMonth - With Day Skips 4 Solution 1; Result: FAILED
+Theme: Java Programming; Worth: 2; Earned: 0
+Description:
+ Input not in same month
+
+Name: dailyMaxForMonth - With Day Skips 3 Solution 2; Result: FAILED
+Theme: Java Programming; Worth: 2; Earned: 0
+Description:
+ More than 2 day skips
+
+Name: dailyMaxForMonth - With Day Skips 5 Solution 1; Result: FAILED
+Theme: Java Programming; Worth: 2; Earned: 0
+Description:
+ Input not in same month
+
+Name: dailyMaxForMonth - With Day Skips 5 Solution 2; Result: FAILED
+Theme: Java Programming; Worth: 2; Earned: 0
+Description:
+ More than 2 day skips
