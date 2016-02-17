@@ -29,18 +29,18 @@ public class EarthquakeTester {
 	// Test setup for 4.1.a
 
 	@Test
-	public void noMissingDays1_1() {
+	public void noSkips1_1() {
 		TestHelper.createTest("dailyMaxForMonth - No missing days (a): Solution 1", "Only 1 month in list input").addTheme(TestTheme.JAVA_PROGAMMING, pts).setup();
-		noMissingDays1(new Earthquake1());
+		noSkips1(new Earthquake1());
 	}
 
 	@Test
-	public void noMissingDays1_2() {
+	public void noSkips1_2() {
 		TestHelper.createTest("dailyMaxForMonth - No missing days (a): Solution 2", "Only 1 month in list input").addTheme(TestTheme.JAVA_PROGAMMING, pts).setup();
-		noMissingDays1(new Earthquake2());
+		noSkips1(new Earthquake2());
 	}
 
-	public void noMissingDays1(IEarthquakeProbs solution) {
+	public void noSkips1(IEarthquakeProbs solution) {
 
 		// Input
 		LinkedList<Double> input = new LinkedList<Double>(Arrays.asList(20151028.0, 200.0, 150.0, 175.0, 20151029.0, 0.002, 0.03, 20151030.0, 82.0, 0.05, 34.0, 121.0));
@@ -62,20 +62,20 @@ public class EarthquakeTester {
 	// Test setup for 4.1.b.
 
 	@Test
-	public void noMissingDays2_1() {
+	public void noSkips2_1() {
 		TestHelper.createTest("dailyMaxForMonth - No missing days (b): Solution 1", ">1 month in list input")
 				  .addTheme(TestTheme.JAVA_PROGAMMING, pts).setup();
-		noMissingDays2(new Earthquake1());
+		noSkips2(new Earthquake1());
 	}
 
 	@Test
-	public void noMissingDays2_2() {
+	public void noSkips2_2() {
 		TestHelper.createTest("dailyMaxForMonth - No missing days (b): Solution 2", ">1 month in list input")
 				  .addTheme(TestTheme.JAVA_PROGAMMING, pts).setup();
-		noMissingDays2(new Earthquake2());
+		noSkips2(new Earthquake2());
 	}
 
-	public void noMissingDays2(IEarthquakeProbs solution) {
+	public void noSkips2(IEarthquakeProbs solution) {
 
 		// Input
 		LinkedList<Double> input = new LinkedList<Double>(Arrays.asList(20151029.0, 0.002, 0.03, 20151030.0, 82.0, 0.05, 34.0, 121.0, 20151031.0, 202.0, 145.0, 0.004, 11.0, 20151101.0, 14.0, 0.7, 20151201.0, 0.23, 144.0, 128.0, 20151202.0, 120.0, 0.0, 0.1, 3.0));
@@ -97,21 +97,21 @@ public class EarthquakeTester {
 	// Test setup for 4.1.c.
 
 	@Test
-	public void noMissingDays3_1() {
+	public void noSkips3_1() {
 		TestHelper.createTest("dailyMaxForMonth - No missing days (c): Solution 1", "Month input is not in list input")
 			      .addTheme(TestTheme.JAVA_PROGAMMING, pts).setup();
-	 	noMissingDays3(new Earthquake1());
+	 	noSkips3(new Earthquake1());
 	}
 
 	@Test
-	public void noMissingDays3_2() {
+	public void noSkips3_2() {
 		TestHelper.createTest("dailyMaxForMonth - No missing days (c): Solution 2", "Month input is not in list input")
 			      .addTheme(TestTheme.JAVA_PROGAMMING, pts).setup();
-	 	noMissingDays3(new Earthquake2());
+	 	noSkips3(new Earthquake2());
 	}
 
-	public void noMissingDays3(IEarthquakeProbs solution) {
-
+	public void noSkips3(IEarthquakeProbs solution) {
+		
 		// Input
 		LinkedList<Double> input = new LinkedList<Double>(Arrays.asList(20151101.0, 14.0, 0.7, 20151201.0, 0.23, 144.0, 128.0, 20151202.0, 120.0, 0.0, 0.1, 3.0));
 
@@ -129,20 +129,20 @@ public class EarthquakeTester {
 	// Test setup for 4.1.d.
 
 	@Test
-	public void noMissingDays4_1() {
+	public void noSkips4_1() {
 		TestHelper.createTest("dailyMaxForMonth - No missing days (d.1): Solution 1", "With 0 as max value")
 				  .addTheme(TestTheme.JAVA_PROGAMMING, pts).setup();
-		noMissingDays4a(new Earthquake1());
+		noSkips4(new Earthquake1());
 	}
 
 	@Test
-	public void noMissingDays4_2() {
+	public void noSkips4_2() {
 		TestHelper.createTest("dailyMaxForMonth - No missing days (d.1): Solution 2", "With 0 as max value")
 				  .addTheme(TestTheme.JAVA_PROGAMMING, pts).setup();
-		noMissingDays4a(new Earthquake2());
+		noSkips4(new Earthquake2());
 	}
 
-	public void noMissingDays4a(IEarthquakeProbs solution) {
+	public void noSkips4(IEarthquakeProbs solution) {
 		
 		// Input
 		LinkedList<Double> input = new LinkedList<Double>(Arrays.asList(20151028.0, -5.0, -110.0, 0.0, -23.0, 20151029.0, 0.002, 0.03, 20151030.0, 82.0, 0.05, 34.0, 121.0));
@@ -161,21 +161,21 @@ public class EarthquakeTester {
 	}
 
 	@Test
-	public void noMissingDays4_3() {
+	public void noSkips5_1() {
 		TestHelper.createTest("dailyMaxForMonth - No missing days (d.2): Solution 1", "With 0 as max value")
 				  .addTheme(TestTheme.JAVA_PROGAMMING, pts).setup();
-		noMissingDays4b(new Earthquake1());
+		noSkips5(new Earthquake1());
 	}
 
 	@Test
-	public void noMissingDays4_4() {
+	public void noSkips5_2() {
 		TestHelper.createTest("dailyMaxForMonth - No missing days (d.2): Solution 2", "With 0 as max value")
 				  .addTheme(TestTheme.JAVA_PROGAMMING, pts).setup();
-		noMissingDays4b(new Earthquake2());
+		noSkips5(new Earthquake2());
 	}
 
-	public void noMissingDays4b(IEarthquakeProbs solution) {
-
+	public void noSkips5(IEarthquakeProbs solution) {
+		
 		// Input
 		LinkedList<Double> input = new LinkedList<Double>(Arrays.asList(20151028.0, 200.0, 150.0, 175.0, 20151029.0, -5.0, -110.0, 0.0, -23.0, 20151030.0, 82.0, 0.05, 34.0, 121.0));
 
@@ -196,20 +196,20 @@ public class EarthquakeTester {
 	// Test setup for 4.2.a
 
 	@Test
-	public void withMissingDays1_1() {
+	public void withSkips1_1() {
 		TestHelper.createTest("dailyMaxForMonth - With missing days (a): Solution 1", "Only 1 month in list input")
 				  .addTheme(TestTheme.JAVA_PROGAMMING, pts).setup();
-		withMissingDays1(new Earthquake1());
+		withSkips1(new Earthquake1());
 	}
 
 	@Test
-	public void withMissingDays1_2() {
+	public void withSkips1_2() {
 		TestHelper.createTest("dailyMaxForMonth - With missing days (a): Solution 2", "Only 1 month in list input")
 				  .addTheme(TestTheme.JAVA_PROGAMMING, pts).setup();
-		withMissingDays1(new Earthquake2());
+		withSkips1(new Earthquake2());
 	}
 
-	public void withMissingDays1(IEarthquakeProbs solution) {
+	public void withSkips1(IEarthquakeProbs solution) {
 		
 		// Input
 		LinkedList<Double> input = new LinkedList<Double>(Arrays.asList(20151028.0, 200.0, 150.0, 175.0, 20151030.0, 82.0, 0.05, 34.0, 121.0, 20151031.0, 202.0, 145.0, 0.004, 11.0));
@@ -231,18 +231,18 @@ public class EarthquakeTester {
 	// Test setup for 4.2.b
 
 	@Test
-	public void withMissingDays2_1() {
+	public void withSkips2_1() {
 		TestHelper.createTest("dailyMaxForMonth - With missing days (b): Solution 1", ">1 month in list input").addTheme(TestTheme.JAVA_PROGAMMING, pts).setup();
-		withMissingDays2(new Earthquake1());
+		withSkips2(new Earthquake1());
 	}
 
 	@Test
-	public void withMissingDays2_2() {
+	public void withSkips2_2() {
 		TestHelper.createTest("dailyMaxForMonth - With missing days (b): Solution 2", ">1 month in list input").addTheme(TestTheme.JAVA_PROGAMMING, pts).setup();
-		withMissingDays2(new Earthquake2());
+		withSkips2(new Earthquake2());
 	}
 
-	public void withMissingDays2(IEarthquakeProbs solution) {
+	public void withSkips2(IEarthquakeProbs solution) {
 
 		// Input
 		LinkedList<Double> input = new LinkedList<Double>(Arrays.asList(20151028.0, 200.0, 150.0, 175.0, 20151030.0, 82.0, 0.05, 34.0, 121.0, 20151031.0, 202.0, 145.0, 0.004, 11.0, 20151101.0, 14.0, 0.7, 20151201.0, 0.23, 144.0, 128.0, 20151202.0, 120.0, 0.0, 0.1, 3.0));
@@ -264,20 +264,19 @@ public class EarthquakeTester {
 	// Test setup for 4.2.c
 
 	@Test
-	public void withMissingDays3_1() {
+	public void withSkips3_1() {
 		TestHelper.createTest("dailyMaxForMonth - With missing days (c): Solution 1", ">= 2 days missing").addTheme(TestTheme.JAVA_PROGAMMING, pts).setup();
-		withMissingDays3(new Earthquake1());
+		withSkips3(new Earthquake1());
 	}
 
 	@Test
-	public void withMissingDays3_2() {
+	public void withSkips3_2() {
 		TestHelper.createTest("dailyMaxForMonth - With missing days (c): Solution 2", ">= 2 days missing").addTheme(TestTheme.JAVA_PROGAMMING, pts).setup();
-		withMissingDays3(new Earthquake2());
+		withSkips3(new Earthquake2());
 	}
 
-	public void withMissingDays3(IEarthquakeProbs solution) {
-		//TestHelper.createTest("dailyMaxForMonth - With Day Skips 3", "More than 2 day skips").addTheme(TestTheme.JAVA_PROGAMMING, pts).setup();
-
+	public void withSkips3(IEarthquakeProbs solution) {
+		
 		// Input
 		LinkedList<Double> input = new LinkedList<Double>(Arrays.asList(20151028.0, 200.0, 150.0, 175.0, 20151031.0, 202.0, 145.0, 0.004, 11.0, 20151101.0, 14.0, 0.7, 20151201.0, 0.23, 144.0, 128.0));
 
@@ -297,18 +296,18 @@ public class EarthquakeTester {
 	// Test setup for 4.2.d
 
 	@Test
-	public void withMissingDays4_1() {
+	public void withSkips4_1() {
 		TestHelper.createTest("dailyMaxForMonth - With missing days (d.1): Solution 1", "With 0 as max value").addTheme(TestTheme.JAVA_PROGAMMING, pts).setup();
-		withMissingDays4a(new Earthquake1());
+		withSkips4(new Earthquake1());
 	}
 
 	@Test
-	public void withMissingDays4_2() {
+	public void withSkips4_2() {
 		TestHelper.createTest("dailyMaxForMonth - With missing days (d.1): Solution 2", "With 0 as max value").addTheme(TestTheme.JAVA_PROGAMMING, pts).setup();
-		withMissingDays4a(new Earthquake2());
+		withSkips4(new Earthquake2());
 	}
 
-	public void withMissingDays4a(IEarthquakeProbs solution) {
+	public void withSkips4(IEarthquakeProbs solution) {
 		
 		// Input
 		LinkedList<Double> input = new LinkedList<Double>(Arrays.asList(20151028.0, -5.0, -110.0, 0.0, -23.0, 20151030.0, 82.0, 0.05, 34.0, 121.0, 20151031.0, 202.0, 145.0, 0.004, 11.0));
@@ -327,18 +326,18 @@ public class EarthquakeTester {
 	}
 
 	@Test
-	public void withMissingDays4_3() {
+	public void withSkips5_1() {
 		TestHelper.createTest("dailyMaxForMonth - With missing days (d.2): Solution 1", "With 0 as max value").addTheme(TestTheme.JAVA_PROGAMMING, pts).setup();
-		withMissingDays4b(new Earthquake1());
+		withSkips5(new Earthquake1());
 	}
 
 	@Test
-	public void withMissingDays4_4() {
+	public void withSkips5_2() {
 		TestHelper.createTest("dailyMaxForMonth - With missing days (d.2): Solution 2", "With 0 as max value").addTheme(TestTheme.JAVA_PROGAMMING, pts).setup();
-		withMissingDays4b(new Earthquake2());
+		withSkips5(new Earthquake2());
 	}
 
-	public void withMissingDays4b(IEarthquakeProbs solution) {
+	public void withSkips5(IEarthquakeProbs solution) {
 		
 		// Input
 		LinkedList<Double> input = new LinkedList<Double>(Arrays.asList(20151028.0, -5.0, -110.0, 0.0, -23.0, 20151030.0, 82.0, 0.05, 34.0, 121.0, 20151031.0, 202.0, 145.0, 0.004, 11.0, 20151101.0, 14.0, 0.7, 20151201.0, 0.23, 144.0, 128.0, 20151202.0, 120.0, 0.0, 0.1, 3.0));
