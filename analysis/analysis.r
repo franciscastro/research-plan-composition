@@ -20,6 +20,10 @@ file_name <- "wpi-id-key.csv"
 stud_data <- read.csv(file_name)
 
 
+# Convert username from factor to character
+stud_data$Username <- as.character(stud_data$Username)
+
+
 # Get data information
 str(stud_data)
 summary(stud_data)
