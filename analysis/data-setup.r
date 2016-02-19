@@ -1,19 +1,23 @@
 #' ---
 #' title: "CS2102 Analysis"
 #' author: "Francisco Castro (fgcastro@wpi.edu)"
-#' date: "18 February, 2016"
+#' date: "18 February 2016"
 #' ---
 
-##################################################
-# Notes: Pre-load the following packages
+
+# NOTES
+#==================================================
+
+# Pre-load the following packages:
 library(tidyr)
 library(dplyr)
 library(ggplot2)
-##################################################
+
+#==================================================
 
 
 # GLOBALS SETUP
-##################################################
+#==================================================
 
 # Set working directory for file manipulation
 working_dir <- "C:/Git Repositories/files"
@@ -23,11 +27,11 @@ getwd()
 # Set file names
 file_name <- "wpi-id-key.csv"
 
-##################################################
+#==================================================
 
 
 # DATA SETUP
-##################################################
+#==================================================
 
 # Read file
 stud_data <- read.csv(file_name)
@@ -42,11 +46,11 @@ stud_data$username <- as.character(stud_data$username)
 # str(stud_data)
 # summary(stud_data)
 
-##################################################
+#==================================================
 
 
 # EXTRACT RELATED DATA POINTS AND VARIABLES
-##################################################
+#==================================================
 
 # Data frame with username, course_grade, jp_score, and prior_course
 stud_jp_prior <- stud_data[,c("username", "course_grade", "jp_score", "prior_course")]
@@ -84,35 +88,5 @@ cs1102_prior_B <- cs1102_prior[cs1102_prior$course_grade == "B",]
 summary(cs1102_prior_A)
 summary(cs1102_prior_B)
 
-##################################################
+#==================================================
 
-
-# RANDOM SAMPLING FROM DATA FRAMES
-##################################################
-
-# Sample 10 students (with 1101 prior) from each grade
-# sample_cs1101_A <- sample_n(cs1101_prior_A, 10)
-# sample_cs1101_B <- sample_n(cs1101_prior_B, 10)
-# sample_cs1101_C <- sample_n(cs1101_prior_C, 10)
-
-# Store sampled students to CSV files
-# write.csv(sample_cs1101_A, "sample-cs1101-A.csv", row.names = FALSE)
-# write.csv(sample_cs1101_B, "sample-cs1101-B.csv", row.names = FALSE)
-# write.csv(sample_cs1101_C, "sample-cs1101-C.csv", row.names = FALSE)
-
-# Sample 10 students (with 1102 prior) from each grade
-# sample_cs1102_A <- sample_n(cs1102_prior_A, 10)
-# sample_cs1102_B <- sample_n(cs1102_prior_B, 10)
-
-# Store sampled students to CSV files
-# write.csv(sample_cs1102_A, "sample-cs1102-A.csv", row.names = FALSE)
-# write.csv(sample_cs1102_B, "sample-cs1102-B.csv", row.names = FALSE)
-
-##################################################
-
-# PLOT GRAPHS
-##################################################
-
-
-
-##################################################
