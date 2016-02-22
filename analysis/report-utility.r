@@ -79,18 +79,18 @@ print(file_names)
 # Find and copy reports
 #==================================================
 
-# Go through each set of file names
+# Go through each vector of file names
 for (i in 1:length(file_names)) {
   
   # Create directory for files
   dir.create(report_dest_dirs[i], showWarnings = TRUE)
   
   # Copy existing files to destination directory
-  file.copy(# Generate a vector of full path names to files
-    file.path(report_source,
-              # Extract a vector of files that exist
-              file_names[[i]][file.exists(file.path(report_source,file_names[[i]]))]),
-    report_dest_dirs[i])
+  file.copy(# Generate a vector of full path names to existing files
+            file.path(report_source,
+                      # Extract a vector of files that exist
+                      file_names[[i]][file.exists(file.path(report_source,file_names[[i]]))]),
+            report_dest_dirs[i])
   
   # Print copied files
   print(list.files(report_dest_dirs[i]))
