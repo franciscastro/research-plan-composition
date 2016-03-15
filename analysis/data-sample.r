@@ -1,12 +1,15 @@
 #' ---
-#' title: "Sampling script"
+#' title: "CS2102 Sampling script"
 #' author: "Francisco Castro (fgcastro@wpi.edu)"
-#' date: "18 February 2016"
+#' date: "15 March 2016"
 #' ---
 
 
 # NOTES
 #==================================================
+#
+# This script is used to randomly sample users from each
+# sub-sample generated from data-setup.r
 #
 # Run data-setup.r prior to running this script.
 #

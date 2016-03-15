@@ -1,13 +1,16 @@
 #' ---
-#' title: "Directory creation"
+#' title: "Directory creation utility script"
 #' author: "Francisco Castro (fgcastro@wpi.edu)"
-#' date: "18 February 2016"
+#' date: "15 March 2016"
 #' ---
 
 
 # NOTES
 #==================================================
 #
+# This script is used to create directories for each
+# sub-sample generated in data-setup.r and data-sample.r
+# 
 # Run data-setup.r prior to running this script.
 #
 #==================================================

@@ -1,12 +1,16 @@
 #' ---
 #' title: "Survey sampling script"
 #' author: "Francisco Castro (fgcastro@wpi.edu)"
-#' date: "14 March 2016"
+#' date: "15 March 2016"
 #' ---
 
 
 # NOTES
 #==================================================
+
+# This utility script is for:
+# 1. Splitting the full survey by programming problem
+# 2. Extracting the sampled users from one of the split surveys
 
 # Pre-load the following packages:
 library(tidyr)
@@ -18,31 +22,31 @@ library(dplyr)
 # GLOBALS SETUP
 #==================================================
 
-# Set working directory for file manipulation
+# Set working directory
 working_dir <- "C:/Git Repositories/files"
 setwd(working_dir)
 getwd()
 
 # Set file names and directories
-file_name <- "clean-survey.csv"
-sampled_name <- "combined.csv"
+source_file_name <- "clean-survey.csv"
+source_sample_names <- "structure-coding-combined-students.csv"
 
 survey_dest <- "C:/Git Repositories/files/data-coding/split-surveys"
-survey_filenames <- c("survey_bmi.csv",
-                      "survey_dsmooth.csv",
-                      "survey_fwords.csv",
-                      "survey_quake.csv")
+survey_filenames <- c("survey-bmi.csv",
+                      "survey-dsmooth.csv",
+                      "survey-fwords.csv",
+                      "survey-quake.csv")
 survey_dest_files <- file.path(survey_dest, survey_filenames)
 
 #==================================================
 
 
-# GET STUDENTS FROM SURVEY FILE FOR EACH PROBLEM
+# SPLIT FULL SURVEY FILE BY PROBLEM
 #==================================================
 
-# Read file
-survey_data <- read.csv(file_name)
-str(survey_data)
+# Read survey file
+survey_data <- read.csv(source_file_name)
+# str(survey_data)
 
 # Rename dataframe column names
 colnames(survey_data) <- c("username", 
@@ -68,7 +72,7 @@ str(survey_fwords)
 survey_quake <- survey_data[,c("username", "problem_quake", "rank_quake1", "rank_quake2", "explain_quake", "plan_quake1", "plan_quake2", "help_quake")]
 str(survey_quake)
 
-# Write sampled students to CSV files (UNCOMMENT TO REWRITE FILES)
+# Write problem surveys to CSV files (UNCOMMENT TO REWRITE FILES)
 # write.csv(survey_bmi, survey_dest_files[1], row.names = FALSE)
 # write.csv(survey_dsmooth, survey_dest_files[2], row.names = FALSE)
 # write.csv(survey_fwords, survey_dest_files[3], row.names = FALSE)
@@ -77,13 +81,13 @@ str(survey_quake)
 #==================================================
 
 
-# EXTRACT STUDENT ENTRIES FROM EARTHQUAKE PROBLEM
+# EXTRACT STUDENT SAMPLE ENTRIES FROM EARTHQUAKE PROBLEM
 #==================================================
 
-# Read file
-coding_data <- read.csv(sampled_name)
+# Read file for getting sample students
+coding_data <- read.csv(source_sample_names)
 
-# Convert columns from factor to character
+# Convert column types as needed
 coding_data$Course <- as.factor(coding_data$Course)
 coding_data$ID <- as.character(coding_data$ID)
 coding_data$SolutionID <- as.factor(coding_data$SolutionID)
@@ -91,9 +95,9 @@ coding_data$Helpers <- as.character(coding_data$Helpers)
 coding_data$Notes <- as.character(coding_data$Notes)
 
 # Get data information
-str(coding_data)
+# str(coding_data)
 
-# Extract sampled users
+# Extract sampled users (Select only SolutionID == 1 to avoid duplicates)
 sampled_ids <- coding_data[coding_data$SolutionID == "1","ID"]
 
 # Extract entries from survey

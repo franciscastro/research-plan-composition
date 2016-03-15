@@ -1,14 +1,15 @@
 #' ---
-#' title: "Report extraction"
+#' title: "CS2102 Report extraction utility script"
 #' author: "Francisco Castro (fgcastro@wpi.edu)"
-#' date: "22 February 2016"
+#' date: "15 March 2016"
 #' ---
 
 # NOTES
 #==================================================
 #
-# This utility script is for extracting the reports
-# needed based on the sampled populations.
+# This utility script is for extracting user reports
+# based on the sampled populations. 
+# (See data-setup.r, data-sample.r)
 #
 #==================================================
 
