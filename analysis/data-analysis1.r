@@ -1,5 +1,5 @@
 #' ---
-#' title: "Setup for CS2102 Analysis"
+#' title: "CS2102 Structure Analysis"
 #' author: "Francisco Castro (fgcastro@wpi.edu)"
 #' date: "14 March 2016"
 #' ---
