@@ -1,5 +1,5 @@
 #' ---
-#' title: "Survey sampling script"
+#' title: "CS2102 Survey sampling script"
 #' author: "Francisco Castro (fgcastro@wpi.edu)"
 #' date: "15 March 2016"
 #' ---
