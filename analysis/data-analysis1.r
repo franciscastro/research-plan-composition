@@ -11,6 +11,7 @@
 # This script is for plotting the code structure counts of
 # each user. Plots are generated for each solution ID to count
 # only one structure for each user.
+# OLD VERSION, DO NOT USE.
 
 # Pre-load the following packages:
 library(tidyr)
