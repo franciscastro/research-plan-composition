@@ -1,7 +1,7 @@
 #' ---
 #' title: "CS[2102/19] Preference Analysis"
 #' author: "Francisco Castro (fgcastro@wpi.edu)"
-#' date: "05 April 2016"
+#' date: "06 April 2016"
 #' ---
 
 
@@ -25,8 +25,7 @@ library(gridExtra)
 
 # Set working directory
 working_dir <- "C:/Git Repositories/files"
-setwd(working_dir)
-getwd()
+setwd(working_dir); getwd()
 
 # Set file names
 file_name1 <- "preference-ranking-cs19.csv"
@@ -76,10 +75,12 @@ pref_data2$pink <- as.factor(pref_data2$pink)
 # Create data frame for problem = rainfall
 rainfall <- pref_data1[pref_data1$problem == "rainfall",]
 
-# Create data frame with occurrence counts of each metric
-rainfall_count <- setDT(data.frame(colSums(rainfall == 1, na.rm = TRUE)), keep.rownames = TRUE)[]
+# Create data frame with occurrence counts of each metric and '0' metric counts
+rainfall_count <- setDT(data.frame(colSums(!is.na(rainfall))), keep.rownames = TRUE)[]
 setnames(rainfall_count, colnames(rainfall_count), c("metric", "count"))
 rainfall_count <- rainfall_count[5:11,]
+rainfall_count <- rbind(rainfall_count, 
+                        data.frame(metric = "none", count = sum(rainfall[,"metric_count"] == 0)))
 
 
 # SHOPPING DISCOUNT: CS19
@@ -87,10 +88,12 @@ rainfall_count <- rainfall_count[5:11,]
 # Create data frame for problem = shopdisc
 shopdisc <- pref_data1[pref_data1$problem == "shopdisc",]
 
-# Create data frame with occurrence counts of each metric
-shopdisc_count <- setDT(data.frame(colSums(shopdisc == 1, na.rm = TRUE)), keep.rownames = TRUE)[]
+# Create data frame with occurrence counts of each metric and '0' metric counts
+shopdisc_count <- setDT(data.frame(colSums(!is.na(shopdisc))), keep.rownames = TRUE)[]
 setnames(shopdisc_count, colnames(shopdisc_count), c("metric", "count"))
 shopdisc_count <- shopdisc_count[5:11,]
+shopdisc_count <- rbind(shopdisc_count, 
+                        data.frame(metric = "none", count = sum(shopdisc[,"metric_count"] == 0)))
 
 
 # EARTHQUAKE: CS19
@@ -98,10 +101,12 @@ shopdisc_count <- shopdisc_count[5:11,]
 # Create data frame for problem = earthquake
 earthquake1 <- pref_data1[pref_data1$problem == "earthquake",]
 
-# Create data frame with occurrence counts of each metric
-earthquake_count1 <- setDT(data.frame(colSums(earthquake1 == 1, na.rm = TRUE)), keep.rownames = TRUE)[]
+# Create data frame with occurrence counts of each metric and '0' metric counts
+earthquake_count1 <- setDT(data.frame(colSums(!is.na(earthquake1))), keep.rownames = TRUE)[]
 setnames(earthquake_count1, colnames(earthquake_count1), c("metric", "count"))
 earthquake_count1 <- earthquake_count1[5:11,]
+earthquake_count1 <- rbind(earthquake_count1, 
+                        data.frame(metric = "none", count = sum(earthquake1[,"metric_count"] == 0)))
 
 
 # EARTHQUAKE: CS2102
@@ -109,10 +114,12 @@ earthquake_count1 <- earthquake_count1[5:11,]
 # Create data frame for problem = earthquake
 earthquake2 <- pref_data2[pref_data2$problem == "earthquake",]
 
-# Create data frame with occurrence counts of each metric
-earthquake_count2 <- setDT(data.frame(colSums(earthquake2 == 1, na.rm = TRUE)), keep.rownames = TRUE)[]
+# Create data frame with occurrence counts of each metric and '0' metric counts
+earthquake_count2 <- setDT(data.frame(colSums(!is.na(earthquake2))), keep.rownames = TRUE)[]
 setnames(earthquake_count2, colnames(earthquake_count2), c("metric", "count"))
 earthquake_count2 <- earthquake_count2[5:11,]
+earthquake_count2 <- rbind(earthquake_count2, 
+                        data.frame(metric = "none", count = sum(earthquake2[,"metric_count"] == 0)))
 
 
 #==================================================
@@ -148,7 +155,7 @@ g_shopdisc + geom_bar(aes(fill = metric), stat = "identity") +
 # Graph number of students for each metric
 g_earthquake1 <- ggplot(data = earthquake_count1, aes(x = metric, y = count))
 g_earthquake1 + geom_bar(aes(fill = metric), stat = "identity") +
-  ggtitle("Earthquake1: Metric Counts") +
+  ggtitle("(19) Earthquake1: Metric Counts") +
   theme(legend.position = "right", 
         axis.text.x = element_text(size = 10, angle = 45, hjust = 1, vjust = 1)) +
   geom_text(aes(label = count), vjust = -0.5, size = 3) + 
@@ -160,7 +167,7 @@ g_earthquake1 + geom_bar(aes(fill = metric), stat = "identity") +
 # Graph number of students for each metric
 g_earthquake2 <- ggplot(data = earthquake_count2, aes(x = metric, y = count))
 g_earthquake2 + geom_bar(aes(fill = metric), stat = "identity") +
-  ggtitle("Earthquake2: Metric Counts") +
+  ggtitle("(2102) Earthquake2: Metric Counts") +
   theme(legend.position = "right", 
         axis.text.x = element_text(size = 10, angle = 45, hjust = 1, vjust = 1)) +
   geom_text(aes(label = count), vjust = -0.5, size = 3) + 

@@ -1,15 +1,15 @@
 #' ---
 #' title: "CS2102 Structure Analysis"
 #' author: "Francisco Castro (fgcastro@wpi.edu)"
-#' date: "28 March 2016"
+#' date: "05 April 2016"
 #' ---
 
 
-# NOTES
+#==================================================
+# NOTES AND DEPENDENCIES
 #==================================================
 
 # This script is for plotting the code structure counts of students. 
-# This uses a stacked bar visualization for each code structure bin.
 
 # Pre-load the following packages:
 library(tidyr)
@@ -18,23 +18,20 @@ library(ggplot2)
 library(data.table)
 library(gridExtra)
 
+
 #==================================================
-
-
 # GLOBALS SETUP
 #==================================================
 
 # Set working directory
 working_dir <- "C:/Git Repositories/files"
-setwd(working_dir)
-getwd()
+setwd(working_dir)#; getwd()
 
 # Set file names
 file_name <- "data.csv"
 
+
 #==================================================
-
-
 # MASTER DATA SETUP
 #==================================================
 
@@ -52,25 +49,22 @@ coding_data$Builtins <- as.character(coding_data$Builtins)
 coding_data$Notes <- as.character(coding_data$Notes)
 
 # Get data information
-# str(coding_data)
-# summary(coding_data)
+# str(coding_data); summary(coding_data)
+
 
 #==================================================
-
-
 # EXTRACT RELATED DATA POINTS
 #==================================================
 
-# Create data frame for SolutionID = 1; exclude cols: Lang, Problem, Helpers, Builtins, Notes
+# Create data frame for SolutionID = 1
 data_id_1 <- coding_data[coding_data$SolutionID == "1", 
                          c("StudyID", "Subgroup", "SolutionID", "Bin", "Structure")]
 
-# Create data frame for SolutionID = 2; exclude cols: Lang, Problem, Helpers, Builtins, Notes
+# Create data frame for SolutionID = 2
 data_id_2 <- coding_data[coding_data$SolutionID == "2", 
                          c("StudyID", "Subgroup", "SolutionID", "Bin", "Structure")]
 
 # Create data frame for plotting over all solutions created
-# Exclude columns: Lang, Problem, Helpers, Builtins, Notes
 all_solns <- coding_data[,c("StudyID", "Subgroup", "SolutionID", "Bin", "Structure")]
 
 # Create data frame that counts occurrences of structures for each bin
@@ -111,13 +105,13 @@ setnames(diff_bins_singletrav_count, c("n"), c("Counts"))
 diff_bins_other <- diff_bins[diff_bins$Bin1 != "SingleTraverse" & 
                                diff_bins$Bin2 != "SingleTraverse",]
 
+
 #==================================================
-
-
 # GRAPHS
 #==================================================
 
 # COUNT ALL STRUCTURE OCCURRENCES PER BIN OVER ALL SOLUTIONS
+# Note: Stacked bar visualization for each code structure bin
 
 # Compute midpoints of bars, for each structure in each bin; store in variable pos
 all_solns_midpoint <- group_by(all_solns_count, Bin) %>% mutate(pos = cumsum(Counts) - (0.5 * Counts))
