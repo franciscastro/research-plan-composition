@@ -28,7 +28,7 @@ working_dir <- "C:/Git Repositories/files"
 setwd(working_dir); getwd()
 
 # Set file names
-file_name1 <- "preference-ranking-cs19.csv"
+file_name1 <- "preference-ranking-cs19-edit.csv"
 file_name2 <- "preference-ranking-cs2102.csv"
 
 
@@ -109,6 +109,36 @@ earthquake_count1 <- rbind(earthquake_count1,
                         data.frame(metric = "none", count = sum(earthquake1[,"metric_count"] == 0)))
 
 
+# RAINFALL-EARTHQUAKE: CS19
+
+# Create data frame combining metric counts for rainfall & earthquake
+rainfall_equake <- rainfall[,c("id", "problem", "metric_count")]
+setnames(rainfall_equake, c("metric_count"), c("rfall_count"))
+rainfall_equake$quake_count <- earthquake1$metric_count[match(rainfall_equake$id, earthquake1$id)]
+rainfall_equake$change <- ifelse(rainfall_equake$rfall_count < rainfall_equake$quake_count, "increase", 
+                                 ifelse(rainfall_equake$rfall_count == rainfall_equake$quake_count, 
+                                        "same", "decrease"))
+
+# Create data frame with counts of 'change' column
+rainfall_equake_count <- data.frame(count(rainfall_equake, change))
+setnames(rainfall_equake_count, c("n"), c("count"))
+
+
+# SHOPDISC-EARTHQUAKE: CS19
+
+# Create data frame combining metric counts for rainfall & earthquake
+shopdisc_equake <- shopdisc[,c("id", "problem", "metric_count")]
+setnames(shopdisc_equake, c("metric_count"), c("shopdisc_count"))
+shopdisc_equake$quake_count <- earthquake1$metric_count[match(shopdisc_equake$id, earthquake1$id)]
+shopdisc_equake$change <- ifelse(shopdisc_equake$shopdisc_count < shopdisc_equake$quake_count, "increase", 
+                                 ifelse(shopdisc_equake$shopdisc_count == shopdisc_equake$quake_count, 
+                                        "same", "decrease"))
+
+# Create data frame with counts of 'change' column
+shopdisc_equake_count <- data.frame(count(shopdisc_equake, change))
+setnames(shopdisc_equake_count, c("n"), c("count"))
+
+
 # EARTHQUAKE: CS2102
 
 # Create data frame for problem = earthquake
@@ -131,7 +161,7 @@ earthquake_count2 <- rbind(earthquake_count2,
 # Graph number of students for each metric
 g_rainfall <- ggplot(data = rainfall_count, aes(x = metric, y = count))
 g_rainfall + geom_bar(aes(fill = metric), stat = "identity") +
-  ggtitle("Rainfall: Metric Counts") +
+  ggtitle("CS19: Rainfall Metric Counts") +
   theme(legend.position = "right",
         axis.text.x = element_text(size = 10, angle = 45, hjust = 1, vjust = 1)) +
   geom_text(aes(label = count), vjust = -0.5, size = 3) +
@@ -143,7 +173,7 @@ g_rainfall + geom_bar(aes(fill = metric), stat = "identity") +
 # Graph number of students for each metric
 g_shopdisc <- ggplot(data = shopdisc_count, aes(x = metric, y = count))
 g_shopdisc + geom_bar(aes(fill = metric), stat = "identity") +
-  ggtitle("Shopping Discount: Metric Counts") +
+  ggtitle("CS19: Shopping Discount Metric Counts") +
   theme(legend.position = "right",
         axis.text.x = element_text(size = 10, angle = 45, hjust = 1, vjust = 1)) +
   geom_text(aes(label = count), vjust = -0.5, size = 3) +
@@ -155,7 +185,7 @@ g_shopdisc + geom_bar(aes(fill = metric), stat = "identity") +
 # Graph number of students for each metric
 g_earthquake1 <- ggplot(data = earthquake_count1, aes(x = metric, y = count))
 g_earthquake1 + geom_bar(aes(fill = metric), stat = "identity") +
-  ggtitle("(19) Earthquake1: Metric Counts") +
+  ggtitle("CS19: Earthquake Metric Counts") +
   theme(legend.position = "right", 
         axis.text.x = element_text(size = 10, angle = 45, hjust = 1, vjust = 1)) +
   geom_text(aes(label = count), vjust = -0.5, size = 3) + 
@@ -167,9 +197,30 @@ g_earthquake1 + geom_bar(aes(fill = metric), stat = "identity") +
 # Graph number of students for each metric
 g_earthquake2 <- ggplot(data = earthquake_count2, aes(x = metric, y = count))
 g_earthquake2 + geom_bar(aes(fill = metric), stat = "identity") +
-  ggtitle("(2102) Earthquake2: Metric Counts") +
+  ggtitle("CS2102: Earthquake Metric Counts") +
   theme(legend.position = "right", 
         axis.text.x = element_text(size = 10, angle = 45, hjust = 1, vjust = 1)) +
   geom_text(aes(label = count), vjust = -0.5, size = 3) + 
   scale_y_continuous(limits = c(0,75))
 
+
+# RAINFALL-EARTHQUAKE CHANGE: CS19
+
+# Graph change in metrics, pre to post
+g_rfall_change <- ggplot(data = rainfall_equake_count, aes(x = change, y = count))
+g_rfall_change + geom_bar(aes(fill = change), stat = "identity") +
+  ggtitle("CS19: Rainfall-Earthquake Metric Changes") +
+  theme(legend.position = "right") +
+  geom_text(aes(label = count), vjust = -0.5, size = 3) +
+  scale_y_continuous(limits = c(0,75))
+
+
+# SHOPDISC-EARTHQUAKE CHANGE: CS19
+
+# Graph change in metrics, pre to post
+g_shopdisc_change <- ggplot(data = shopdisc_equake_count, aes(x = change, y = count))
+g_shopdisc_change + geom_bar(aes(fill = change), stat = "identity") +
+  ggtitle("CS19: ShopDisc-Earthquake Metric Changes") +
+  theme(legend.position = "right") +
+  geom_text(aes(label = count), vjust = -0.5, size = 3) +
+  scale_y_continuous(limits = c(0,75))

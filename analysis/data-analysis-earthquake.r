@@ -1,7 +1,7 @@
 #' ---
 #' title: "CS2102/19 Earthquake Structure Analysis"
 #' author: "Francisco Castro (fgcastro@wpi.edu)"
-#' date: "06 April 2016"
+#' date: "07 April 2016"
 #' ---
 
 
@@ -174,6 +174,4 @@ g_all_solns1102 + geom_bar(aes(fill = Structure), stat = "identity") +
   ggtitle("CS2102: All solutions from students with 1102 background") +
   theme(legend.position = "bottom") +
   geom_text(aes(label = Counts, y = pos), color = "white")
-
-#==================================================
 
