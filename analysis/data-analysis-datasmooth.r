@@ -1,5 +1,5 @@
 #' ---
-#' title: "CS2102/19 Earthquake Structure Analysis"
+#' title: "CS2102/19 Datasmooth Structure Analysis"
 #' author: "Francisco Castro (fgcastro@wpi.edu)"
 #' date: "13 April 2016"
 #' ---
@@ -30,7 +30,7 @@ setwd(working_dir)#; getwd()
 
 # Set file names
 # file_name1 <- "coding-2102-earthquake.csv"
-file_name2 <- "coding-19-earthquake.csv"
+file_name2 <- "coding-19-datasmooth.csv"
 
 
 #==================================================
@@ -53,6 +53,7 @@ coding_data1$Bin <- as.factor(coding_data1$Bin)
 coding_data1$Structure <- as.factor(coding_data1$Structure)
 coding_data1$Helpers <- as.character(coding_data1$Helpers)
 coding_data1$Builtins <- as.character(coding_data1$Builtins)
+coding_data1$Correctness <- as.character(coding_data1$Correctness)
 coding_data1$Notes <- as.character(coding_data1$Notes)
 
 # Get data information
@@ -93,57 +94,25 @@ setnames(same_bins_count1, c("n"), c("Counts"))
 # Create data frame containing students who has different Bin1 and Bin2
 diff_bins1 <- combined_sols1[combined_sols1$Bin1 != combined_sols1$Bin2,]
 
-# Create data frame containing students who has an AllTogether solution for Bin1 and Bin2
-# NOTE: AllTogether is either SingleTraverse or NestedTraverse
-allin1trav_both1 <- diff_bins1[(diff_bins1$Bin1 == "SingleTraverse" | diff_bins1$Bin1 == "NestedTraverse") &
-                            (diff_bins1$Bin2 == "SingleTraverse" | diff_bins1$Bin2 == "NestedTraverse"),]
+# Create data frame with at least one of the solutions as ExtractFirst
+diff_bins_extrct1st <- diff_bins1[diff_bins1$Bin1 == "ExtractFirst" | diff_bins1$Bin2 == "ExtractFirst",]
 
-# Modify diff_bins1 so that it removes all rows with AllTogether solutions for both Bin1 and Bin2
-diff_bins1 <- setdiff(diff_bins1, allin1trav_both1)
+# Swap the values so that all ExtractFirst-s are under Bin1, swap corresponding Structures
+diff_bins_extrct1st[diff_bins_extrct1st$Bin2 == "ExtractFirst", c("Bin1","Structure1","Bin2","Structure2")] <-
+  diff_bins_extrct1st[diff_bins_extrct1st$Bin2 == "ExtractFirst", c("Bin2","Structure2","Bin1","Structure1")]
 
-# Create data frame with at least one of the solutions as an AllTogether
-diff_bins_allin1trav1 <- diff_bins1[diff_bins1$Bin1 == "SingleTraverse" | diff_bins1$Bin1 == "NestedTraverse" |
-                                      diff_bins1$Bin2 == "SingleTraverse" | diff_bins1$Bin2 == "NestedTraverse",]
+diff_bins_extrct1st_count1 <- data.frame(count(diff_bins_extrct1st, Bin1, Bin2))
+setnames(diff_bins_extrct1st_count1, c("n"), c("Counts"))
 
-# Swap the values so that all Single/NestedTraverse-s are under Bin1, swap corresponding Structures
-diff_bins_allin1trav1[diff_bins_allin1trav1$Bin2 == "SingleTraverse" | diff_bins_allin1trav1$Bin2 == "NestedTraverse", 
-                      c("Bin1","Structure1","Bin2","Structure2")] <-
-  diff_bins_allin1trav1[diff_bins_allin1trav1$Bin2 == "SingleTraverse" | diff_bins_allin1trav1$Bin2 == "NestedTraverse"
-                        , c("Bin2","Structure2","Bin1","Structure1")]
+# Create data frame with all other solutions that didn't use ExtractFirst
+diff_bins_other1 <- diff_bins1[diff_bins1$Bin1 != "ExtractFirst" & diff_bins1$Bin2 != "ExtractFirst",]
 
-diff_bins_allin1trav_count1 <- data.frame(count(diff_bins_allin1trav1, Bin1, Bin2))
-setnames(diff_bins_allin1trav_count1, c("n"), c("Counts"))
-
-# Create data frame from diff_bins_allin1trav1 that has Bin1 in SingleTraverse
-diff_bins_singltrav1 <- diff_bins_allin1trav1[diff_bins_allin1trav1$Bin1 == "SingleTraverse",]
-
-# Create data frame that counts occurrences of other bins for students with one SingleTrav
-diff_bins_singltrav_count1 <- data.frame(count(diff_bins_singltrav1, Bin2))
-setnames(diff_bins_singltrav_count1, c("n"), c("Counts"))
-
-# Create data frame from diff_bins_allin1trav1 that has Bin1 in NestedTraverse
-diff_bins_nstdtrav1 <- diff_bins_allin1trav1[diff_bins_allin1trav1$Bin1 == "NestedTraverse",]
-
-# Create data frame that counts occurrences of other bins for students with one NestedTrav
-diff_bins_nstdtrav_count1 <- data.frame(count(diff_bins_nstdtrav1, Bin2))
-setnames(diff_bins_nstdtrav_count1, c("n"), c("Counts"))
-
-# Create data frame with all other solutions that didn't use SingleTraverse or NestedTraverse
-diff_bins_other1 <- diff_bins1[diff_bins1$Bin1 != "SingleTraverse" & diff_bins1$Bin2 != "SingleTraverse" &
-                                 diff_bins1$Bin1 != "NestedTraverse" & diff_bins1$Bin2 != "NestedTraverse",]
-
-# Create data frame of students with 1102 background
-studs_1102 <- clean_data1[clean_data1$Subgroup == "1102-a" | clean_data1$Subgroup == "1102-b",]
-
-# Create data frame with occurrence counts of structures for each bin for students with 1102 background
-bin_structs1102_count <- data.frame(count(studs_1102, Bin, Structure))
-setnames(bin_structs1102_count, c("n"), c("Counts"))
 
 #==================================================
 # GRAPHS
 #==================================================
 
-# EARTHQUAKE: CS2102
+# DATASMOOTH
 
 # ALL STRUCTURE OCCURRENCES PER BIN OVER ALL SOLUTIONS
 # Note: Stacked bar visualization for each code structure bin
@@ -172,43 +141,21 @@ g_same_bins1 + geom_bar(aes(fill = Bin1), stat = "identity") +
   scale_y_continuous(limits = c(0,15))
 
 
-# STUDENTS WITH DIFFERENT BINS, BUT ONE IN SINGLETRAVERSE/NESTEDTRAVERSE BIN
+# STUDENTS WITH DIFFERENT BINS, BUT ONE IN EXTRACTFIRST BIN
 
-g_diff_bins_allin1trav1 <- ggplot(data = diff_bins_allin1trav_count1, aes(x = Bin2, y = Counts))
-g_diff_bins_allin1trav1 + geom_bar(aes(fill = Bin2), stat = "identity") + 
-  # ggtitle("CS2102: Students with [Single/Nested]Traverse as one of the solutions") + 
-  ggtitle("CS19: Students with [Single/Nested]Traverse as one of the solutions") + 
-  theme(legend.position = "bottom") + 
-  geom_text(aes(label = Counts), vjust = -0.5) + 
-  scale_y_continuous(limits = c(0,15)) +
-  facet_grid(Bin1 ~ .)
-
-
-# STUDENTS WITH DIFFERENT SOLUTIONS BUT BOTH IN ALLTOGETHER
-
-# g_allin1trav_both1 <- tableGrob(allin1trav_both1)
-# grob_title <- textGrob("Students with different solutions but both in AllTogether")
-# grid.arrange(grob_title, g_allin1trav_both1)
+g_diff_bins_extrct1st_count1 <- ggplot(data = diff_bins_extrct1st_count1, aes(x = Bin2, y = Counts))
+g_diff_bins_extrct1st_count1 + geom_bar(aes(fill = Bin2), stat = "identity") +
+  # ggtitle("CS2102: Students with [Single/Nested]Traverse as one of the solutions") +
+  ggtitle("CS19: Students with ExtractFirst as one of the solutions") +
+  theme(legend.position = "bottom") +
+  geom_text(aes(label = Counts), vjust = -0.5) +
+  scale_y_continuous(limits = c(0,15))
 
 
-# STUDENTS WHO DID NOT DO SINGLETRAVERSE OR NESTED TRAVERSE
+# STUDENTS WHO DID NOT DO EXTRACTFIRST
 
 g_diff_bins_other1 <- tableGrob(diff_bins_other1)
-grob_title <- textGrob("Students who did not do SingleTraverse or NestedTraverse")
+grob_title <- textGrob("Students who did not do ExtractFirst")
 grid.arrange(grob_title, g_diff_bins_other1)
 
-
-# FOR STUDENTS WITH 1102 BACKGROUND
-
-# Compute midpoints of bars, for each structure in each bin; store in variable pos
-# bin_structs1102_midpoint <- group_by(bin_structs1102_count, Bin) %>% 
-#   mutate(pos = cumsum(Counts) - (0.5 * Counts))
-
-# Graph all structures, grouped by bin
-# g_all_solns1102 <- ggplot(data = bin_structs1102_midpoint, aes(x = Bin, y = Counts))
-# g_all_solns1102 + geom_bar(aes(fill = Structure), stat = "identity") +
-#   coord_flip() +
-#   ggtitle("CS2102: All solutions from students with 1102 background") +
-#   theme(legend.position = "bottom") +
-#   geom_text(aes(label = Counts, y = pos), color = "white")
 

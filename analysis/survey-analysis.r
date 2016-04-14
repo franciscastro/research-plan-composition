@@ -123,6 +123,11 @@ rainfall_equake$change <- ifelse(rainfall_equake$rfall_count < rainfall_equake$q
 rainfall_equake_count <- data.frame(count(rainfall_equake, change))
 setnames(rainfall_equake_count, c("n"), c("count"))
 
+# Create data frame from rainfall_equake with change == 'same', 'increase', 'decrease'
+rfall_equake_same <- rainfall_equake[rainfall_equake$change == "same",]
+rfall_equake_incr <- rainfall_equake[rainfall_equake$change == "increase",]
+rfall_equake_decr <- rainfall_equake[rainfall_equake$change == "decrease",]
+
 
 # SHOPDISC-EARTHQUAKE: CS19
 
@@ -137,6 +142,11 @@ shopdisc_equake$change <- ifelse(shopdisc_equake$shopdisc_count < shopdisc_equak
 # Create data frame with counts of 'change' column
 shopdisc_equake_count <- data.frame(count(shopdisc_equake, change))
 setnames(shopdisc_equake_count, c("n"), c("count"))
+
+# Create data frame from shopdisc_equake with change == 'same', 'increase', 'decrease'
+shopdisc_equake_same <- shopdisc_equake[shopdisc_equake$change == "same",]
+shopdisc_equake_incr <- shopdisc_equake[shopdisc_equake$change == "increase",]
+shopdisc_equake_decr <- shopdisc_equake[shopdisc_equake$change == "decrease",]
 
 
 # EARTHQUAKE: CS2102
@@ -224,3 +234,45 @@ g_shopdisc_change + geom_bar(aes(fill = change), stat = "identity") +
   theme(legend.position = "right") +
   geom_text(aes(label = count), vjust = -0.5, size = 3) +
   scale_y_continuous(limits = c(0,75))
+
+
+#==================================================
+# FILE WRITING FOR ADDITIONAL ANALYSIS
+#==================================================
+
+# RAINFALL-EARTHQUAKE: CS19
+
+# # Get entries from earthquake1 and rainfall for csv writing
+# rfall_same1 <- earthquake1[match(rfall_equake_same$id, earthquake1$id),]
+# rfall_same2 <- rainfall[match(rfall_equake_same$id, rainfall$id),]
+# rfall_incr1 <- earthquake1[match(rfall_equake_incr$id, earthquake1$id),]
+# rfall_incr2 <- rainfall[match(rfall_equake_incr$id, rainfall$id),]
+# rfall_decr1 <- earthquake1[match(rfall_equake_decr$id, earthquake1$id),]
+# rfall_decr2 <- rainfall[match(rfall_equake_decr$id, rainfall$id),]
+# 
+# # Write to csv for analysis
+# write.csv(rfall_same1, file.path(working_dir, "rfall_same1.csv"), row.names = FALSE)
+# write.csv(rfall_same2, file.path(working_dir, "rfall_same2.csv"), row.names = FALSE)
+# write.csv(rfall_incr1, file.path(working_dir, "rfall_incr1.csv"), row.names = FALSE)
+# write.csv(rfall_incr2, file.path(working_dir, "rfall_incr2.csv"), row.names = FALSE)
+# write.csv(rfall_decr1, file.path(working_dir, "rfall_decr1.csv"), row.names = FALSE)
+# write.csv(rfall_decr2, file.path(working_dir, "rfall_decr2.csv"), row.names = FALSE)
+
+# SHOPDISC-EARTHQUAKE: CS19
+
+# Get entries from earthquake1 and shopdisc for csv writing
+shopdisc_same1 <- earthquake1[match(shopdisc_equake_same$id, earthquake1$id),]
+shopdisc_same2 <- shopdisc[match(shopdisc_equake_same$id, shopdisc$id),]
+shopdisc_incr1 <- earthquake1[match(shopdisc_equake_incr$id, earthquake1$id),]
+shopdisc_incr2 <- shopdisc[match(shopdisc_equake_incr$id, shopdisc$id),]
+shopdisc_decr1 <- earthquake1[match(shopdisc_equake_decr$id, earthquake1$id),]
+shopdisc_decr2 <- shopdisc[match(shopdisc_equake_decr$id, shopdisc$id),]
+
+# Write to csv for analysis
+write.csv(shopdisc_same1, file.path(working_dir, "shopdisc_same1.csv"), row.names = FALSE)
+write.csv(shopdisc_same2, file.path(working_dir, "shopdisc_same2.csv"), row.names = FALSE)
+write.csv(shopdisc_incr1, file.path(working_dir, "shopdisc_incr1.csv"), row.names = FALSE)
+write.csv(shopdisc_incr2, file.path(working_dir, "shopdisc_incr2.csv"), row.names = FALSE)
+write.csv(shopdisc_decr1, file.path(working_dir, "shopdisc_decr1.csv"), row.names = FALSE)
+write.csv(shopdisc_decr2, file.path(working_dir, "shopdisc_decr2.csv"), row.names = FALSE)
+
