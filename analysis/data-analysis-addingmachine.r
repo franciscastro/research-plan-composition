@@ -1,7 +1,7 @@
 #' ---
 #' title: "CS19 Adding Machine Structure Analysis"
 #' author: "Francisco Castro (fgcastro@wpi.edu)"
-#' date: "13 April 2016"
+#' date: "14 April 2016"
 #' ---
 
 
@@ -46,6 +46,7 @@ coding_data1$Lang <- as.factor(coding_data1$Lang)
 coding_data1$Problem <- as.factor(coding_data1$Problem)
 coding_data1$Subgroup <- as.factor(coding_data1$Subgroup)
 coding_data1$SolutionID <- as.factor(coding_data1$SolutionID)
+coding_data1$Bin <- as.factor(coding_data1$Bin)
 coding_data1$Structure <- as.factor(coding_data1$Structure)
 coding_data1$Helpers <- as.character(coding_data1$Helpers)
 coding_data1$Notes <- as.character(coding_data1$Notes)
@@ -60,11 +61,11 @@ coding_data1$Notes <- as.character(coding_data1$Notes)
 #==================================================
 
 # Create data frame with just the needed columns
-clean_data1 <- coding_data1[, c("StudyID", "Subgroup", "SolutionID", "Structure")]
+clean_data1 <- coding_data1[, c("StudyID", "Subgroup", "Bin", "SolutionID", "Structure")]
 
-# Create data frame with occurrence counts of structures for each subgroup
-struct_subgroup_count1 <- data.frame(count(clean_data1, Structure, Subgroup))
-setnames(struct_subgroup_count1, c("n"), c("Counts"))
+# Create data frame with occurrence counts of structures for each bin
+bin_struct_count1 <- data.frame(count(clean_data1, Bin, Structure))
+setnames(bin_struct_count1, c("n"), c("Counts"))
 
 
 #==================================================
@@ -74,12 +75,11 @@ setnames(struct_subgroup_count1, c("n"), c("Counts"))
 # ADDING MACHINE: CS19
 
 # Compute midpoints of bars, for each subgroup in each structure; store in variable pos
-struct_subgroup_midpoint1 <- group_by(struct_subgroup_count1, Structure) %>% mutate(pos = cumsum(Counts) - (0.5 * Counts))
+bin_struct_midpoint1 <- group_by(bin_struct_count1, Bin) %>% mutate(pos = cumsum(Counts) - (0.5 * Counts))
 
 # Graph all subgroups, grouped by structure
-g_struct_subgroup1 <- ggplot(data=struct_subgroup_midpoint1, aes(x=Structure, y=Counts))
-g_struct_subgroup1 + geom_bar(aes(fill=Subgroup), stat = "identity") +
-  coord_flip() +
+g_bin_struct1 <- ggplot(data=bin_struct_midpoint1, aes(x=Bin, y=Counts))
+g_bin_struct1 + geom_bar(aes(fill=Structure), stat = "identity") +
   ggtitle("CS19: Adding Machine Structures") +
   theme(legend.position = "bottom") +
   geom_text(aes(label = Counts, y = pos), color="white")
