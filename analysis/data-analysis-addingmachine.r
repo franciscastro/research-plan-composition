@@ -67,6 +67,10 @@ clean_data1 <- coding_data1[, c("StudyID", "Subgroup", "Bin", "SolutionID", "Str
 bin_struct_count1 <- data.frame(count(clean_data1, Bin, Structure))
 setnames(bin_struct_count1, c("n"), c("Counts"))
 
+# Create data frame with occurrence counts for each bin
+bin_count <- data.frame(count(clean_data1, Bin))
+setnames(bin_count, c("n"), c("Counts"))
+
 
 #==================================================
 # GRAPHS
@@ -83,4 +87,15 @@ g_bin_struct1 + geom_bar(aes(fill=Structure), stat = "identity") +
   ggtitle("CS19: Adding Machine Structures") +
   theme(legend.position = "bottom") +
   geom_text(aes(label = Counts, y = pos), color="white")
+
+# Graph number of occurrence per bin
+ggplot(data=bin_count, aes(x=Bin, y=Counts)) + 
+  geom_bar(aes(fill=Bin), stat='identity') +
+  theme(legend.position='none', 
+        axis.ticks.x=element_blank(), 
+        panel.grid.major = element_blank(), 
+        axis.text.x=element_text(size=12)) +
+  geom_text(aes(label=Counts), vjust=1.5, color='white', fontface='bold', size=5) +
+  scale_y_continuous(limits=c(0,10.5), expand=c(0,0), breaks = c(0,2,4,6,8,10)) + 
+  labs(x='\nPlan', y='Number of Students in each Plan Type\n')
 

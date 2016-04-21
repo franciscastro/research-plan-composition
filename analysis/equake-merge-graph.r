@@ -131,6 +131,13 @@ dsmooth_bin_group_count$Percentage <- round(ifelse(dsmooth_bin_group_count$Study
                                                   ifelse(dsmooth_bin_group_count$StudyGroup == "1102", ((dsmooth_bin_group_count$Counts / n_1102) * 100),
                                                          ((dsmooth_bin_group_count$Counts / n_19) * 100))),2)
 
+# Add 0-values to Bin-StudyGroup combinations that have 0 occurences
+equake_bin_group_count <- equake_bin_group_count %>% expand(Bin, StudyGroup) %>% left_join(equake_bin_group_count)
+equake_bin_group_count <- replace_na(equake_bin_group_count, replace=list(Counts = 0, Percentage = 0))
+
+dsmooth_bin_group_count <- dsmooth_bin_group_count %>% expand(Bin, StudyGroup) %>% left_join(dsmooth_bin_group_count)
+dsmooth_bin_group_count <- replace_na(dsmooth_bin_group_count, replace=list(Counts = 0, Percentage = 0))
+
 
 #==================================================
 # GRAPHS
@@ -142,24 +149,40 @@ dsmooth_bin_group_count$Percentage <- round(ifelse(dsmooth_bin_group_count$Study
 ggplot(data=equake_bin_group_count, aes(x=Bin, y=Percentage, fill=StudyGroup)) + 
   coord_flip() +
   geom_bar(stat='identity', position='dodge', colour="black") + 
-  geom_text(aes(label=paste(Percentage, "%")), hjust=-0.3, position=position_dodge(.95), size=3) +
+  geom_text(aes(label=paste(Percentage, "%")), 
+            hjust=-0.2, 
+            position=position_dodge(0.95), 
+            size=3.5, 
+            colour='deepskyblue4', 
+            fontface='bold') +
   scale_y_continuous(limits=c(0,70), expand=c(0,0))+ 
   theme(legend.position=c(0.8,0.3), 
         legend.background=element_rect(size=0.5, linetype='solid', colour ='darkblue'), 
         axis.line=element_line(colour="black"), 
-        panel.grid.major = element_blank(), axis.ticks.x=element_blank()) +
-  labs(fill='Study Group', x='\nPlan', y='\n% of Solutions in each Plan Type')
+        panel.grid.major = element_blank(), 
+        axis.ticks.x=element_blank(),
+        axis.text.y = element_text(size=12)) +
+  labs(fill='Study Group', x='\nPlan', y='\n% of Solutions in each Plan Type') + 
+  scale_fill_manual(labels=c("CrsBnvc", "CrsBexp", "CrsA"), values=c("black", "white", "#56B4E9"))
 
 # DATASMOOTH
 ggplot(data=dsmooth_bin_group_count, aes(x=Bin, y=Percentage, fill=StudyGroup)) + 
   coord_flip() +
   geom_bar(stat='identity', position='dodge', colour="black") + 
-  geom_text(aes(label=paste(Percentage, "%")), hjust=-0.3, position=position_dodge(.95), size=3) +
+  geom_text(aes(label=paste(Percentage, "%")), 
+            hjust=-0.2, 
+            position=position_dodge(0.95), 
+            size=3.5, 
+            colour='deepskyblue4', 
+            fontface='bold') +
   scale_y_continuous(limits=c(0,70), expand=c(0,0))+ 
   theme(legend.position=c(0.8,0.3), 
         legend.background=element_rect(size=0.5, linetype='solid', colour ='darkblue'), 
         axis.line=element_line(colour="black"), 
-        panel.grid.major = element_blank(), axis.ticks.x=element_blank()) +
-  labs(fill='Study Group', x='\nPlan', y='\n% of Solutions in each Plan Type')
+        panel.grid.major = element_blank(), 
+        axis.ticks.x=element_blank(),
+        axis.text.y=element_text(size=12)) +
+  labs(fill='Study Group', x='\nPlan', y='\n% of Solutions in each Plan Type') + 
+  scale_fill_manual(labels=c("CrsBnvc", "CrsBexp", "CrsA"), values=c("black", "white", "#56B4E9"))
 
 

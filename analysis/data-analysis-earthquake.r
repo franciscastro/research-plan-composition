@@ -64,7 +64,7 @@ coding_data1$Notes <- as.character(coding_data1$Notes)
 # EXTRACT RELATED DATA POINTS
 #==================================================
 
-# EARTHQUAKE: CS2102
+# EARTHQUAKE
 
 # Create data frame with just the needed columns
 clean_data1 <- coding_data1[, c("StudyID", "Subgroup", "SolutionID", "Bin", "Structure")]
@@ -76,6 +76,10 @@ sol_id2 <- clean_data1[clean_data1$SolutionID == "2",]
 # Create data frame with occurrence counts of structures for each bin
 bin_structs_count1 <- data.frame(count(clean_data1, Bin, Structure))
 setnames(bin_structs_count1, c("n"), c("Counts"))
+
+# Create data frame with occurrence counts for each bin
+bin_count <- data.frame(count(clean_data1, Bin))
+setnames(bin_count, c("n"), c("Counts"))
 
 # Create data frame combining solutions 1 & 2 bins and structures in each student row entry
 combined_sols1 <- sol_id1[,c("StudyID", "Subgroup", "Bin", "Structure")]
@@ -276,7 +280,7 @@ diff_bins_other1101 <- diff_bins1101[diff_bins1101$Bin1 != "SingleTraverse" & di
 # GRAPHS
 #==================================================
 
-# EARTHQUAKE: CS2102
+# EARTHQUAKE
 
 # ALL STRUCTURE OCCURRENCES PER BIN OVER ALL SOLUTIONS
 # Note: Stacked bar visualization for each code structure bin
@@ -293,6 +297,18 @@ g_all_solns1 + geom_bar(aes(fill = Structure), stat = "identity") +
   theme(legend.position = "bottom") +
   geom_text(aes(label = Counts, y = pos), color = "white")
 
+# Graph number of occurrence per bin
+ggplot(data=bin_count, aes(x=Bin, y=Counts)) + 
+  geom_bar(aes(fill=Bin), stat='identity') +
+  coord_flip() +
+  theme(legend.position='none', 
+        axis.ticks.x=element_blank(), 
+        panel.grid.major = element_blank(), 
+        axis.text.y=element_text(size=12)) +
+  geom_text(aes(label=Counts), hjust=1.3, color='white', fontface='bold', size=5) +
+  scale_y_continuous(limits=c(0,30), expand=c(0,0)) + 
+  labs(x='Plan\n', y='\nNumber of Solutions in each Plan Type')
+
 
 # STUDENTS WITH SAME BINS FOR BOTH SOLUTIONS
 
@@ -308,11 +324,11 @@ g_same_bins1 + geom_bar(aes(fill = Bin1), stat = "identity") +
 # STUDENTS WITH DIFFERENT BINS, BUT ONE IN SINGLETRAVERSE/NESTEDTRAVERSE BIN
 
 g_diff_bins_allin1trav1 <- ggplot(data = diff_bins_allin1trav_count1, aes(x = Bin2, y = Counts))
-g_diff_bins_allin1trav1 + geom_bar(aes(fill = Bin2), stat = "identity") + 
+g_diff_bins_allin1trav1 + geom_bar(aes(fill = Bin2), stat = "identity") +
   ggtitle("CS2102: Students with [Single/Nested]Traverse as one of the solutions") +
-  # ggtitle("CS19: Students with [Single/Nested]Traverse as one of the solutions") + 
-  theme(legend.position = "bottom") + 
-  geom_text(aes(label = Counts), vjust = -0.5) + 
+  # ggtitle("CS19: Students with [Single/Nested]Traverse as one of the solutions") +
+  theme(legend.position = "bottom") +
+  geom_text(aes(label = Counts), vjust = -0.5) +
   scale_y_continuous(limits = c(0,15)) +
   facet_grid(Bin1 ~ .)
 
@@ -355,14 +371,14 @@ g_same_bins1102 + geom_bar(aes(fill = Bin1), stat = "identity") +
 
 # 1102 STUDENTS WITH DIFFERENT BINS, BUT ONE IN SINGLETRAVERSE/NESTEDTRAVERSE BIN
 g_diff_bins_allin1trav1102 <- ggplot(data = diff_bins_allin1trav_count1102, aes(x = Bin2, y = Counts))
-g_diff_bins_allin1trav1102 + geom_bar(aes(fill = Bin2), stat = "identity") + 
+g_diff_bins_allin1trav1102 + geom_bar(aes(fill = Bin2), stat = "identity") +
   ggtitle("CS2102: 1102 Students with [Single/Nested]Traverse as one of the solutions") +
-  theme(legend.position = "bottom") + 
-  geom_text(aes(label = Counts), vjust = -0.5) + 
+  theme(legend.position = "bottom") +
+  geom_text(aes(label = Counts), vjust = -0.5) +
   scale_y_continuous(limits = c(0,15)) +
   facet_grid(Bin1 ~ .)
 
-# 1102 STUDENTS WITH DIFFERENT SOLUTIONS BUT BOTH IN ALLTOGETHER
+# # 1102 STUDENTS WITH DIFFERENT SOLUTIONS BUT BOTH IN ALLTOGETHER
 # g_allin1trav_both1102 <- tableGrob(allin1trav_both1102)
 # grob_title <- textGrob("1102 Students with different solutions but both in AllTogether")
 # grid.arrange(grob_title, g_allin1trav_both1102)
@@ -378,7 +394,7 @@ grid.arrange(grob_title, g_diff_bins_other1102)
 # Compute midpoints of bars, for each structure in each bin; store in variable pos
 bin_structs1101_midpoint <- group_by(bin_structs1101_count, Bin) %>%
   mutate(pos = cumsum(Counts) - (0.5 * Counts))
-
+#
 # Graph all structures, grouped by bin
 g_all_solns1101 <- ggplot(data = bin_structs1101_midpoint, aes(x = Bin, y = Counts))
 g_all_solns1101 + geom_bar(aes(fill = Structure), stat = "identity") +
@@ -386,7 +402,7 @@ g_all_solns1101 + geom_bar(aes(fill = Structure), stat = "identity") +
   ggtitle("CS2102: All solutions from students with 1101 background") +
   theme(legend.position = "bottom") +
   geom_text(aes(label = Counts, y = pos), color = "white")
-
+#
 # 1101 STUDENTS WITH SAME BINS FOR BOTH SOLUTIONS
 g_same_bins1101 <- ggplot(data = same_bins_count1101, aes(x = Bin1, y = Counts))
 g_same_bins1101 + geom_bar(aes(fill = Bin1), stat = "identity") +
@@ -394,21 +410,21 @@ g_same_bins1101 + geom_bar(aes(fill = Bin1), stat = "identity") +
   theme(legend.position = "bottom") +
   geom_text(aes(label = Counts), vjust = -0.5) +
   scale_y_continuous(limits = c(0,15))
-
+#
 # 1101 STUDENTS WITH DIFFERENT BINS, BUT ONE IN SINGLETRAVERSE/NESTEDTRAVERSE BIN
 g_diff_bins_allin1trav1101 <- ggplot(data = diff_bins_allin1trav_count1101, aes(x = Bin2, y = Counts))
-g_diff_bins_allin1trav1101 + geom_bar(aes(fill = Bin2), stat = "identity") + 
+g_diff_bins_allin1trav1101 + geom_bar(aes(fill = Bin2), stat = "identity") +
   ggtitle("CS2102: 1101 Students with [Single/Nested]Traverse as one of the solutions") +
-  theme(legend.position = "bottom") + 
-  geom_text(aes(label = Counts), vjust = -0.5) + 
+  theme(legend.position = "bottom") +
+  geom_text(aes(label = Counts), vjust = -0.5) +
   scale_y_continuous(limits = c(0,15)) +
   facet_grid(Bin1 ~ .)
-
+#
 # 1101 STUDENTS WITH DIFFERENT SOLUTIONS BUT BOTH IN ALLTOGETHER
 g_allin1trav_both1101 <- tableGrob(allin1trav_both1101)
 grob_title <- textGrob("1101 Students with different solutions but both in AllTogether")
 grid.arrange(grob_title, g_allin1trav_both1101)
-
+#
 # 1101 STUDENTS WHO DID NOT DO SINGLETRAVERSE OR NESTED TRAVERSE
 g_diff_bins_other1101 <- tableGrob(diff_bins_other1101)
 grob_title <- textGrob("1101 Students who did not do SingleTraverse or NestedTraverse")

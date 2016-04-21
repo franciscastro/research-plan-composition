@@ -28,8 +28,8 @@ working_dir <- "C:/Git Repositories/files"
 setwd(working_dir); getwd()
 
 # Set file names
-file_name1 <- "preference-ranking-cs19-edit.csv"
-file_name2 <- "preference-ranking-cs2102.csv"
+file_name1 <- "metrics-cited-cs19.csv"
+file_name2 <- "metrics-cited-cs2102.csv"
 
 
 #==================================================
@@ -261,18 +261,18 @@ g_shopdisc_change + geom_bar(aes(fill = change), stat = "identity") +
 # SHOPDISC-EARTHQUAKE: CS19
 
 # Get entries from earthquake1 and shopdisc for csv writing
-shopdisc_same1 <- earthquake1[match(shopdisc_equake_same$id, earthquake1$id),]
-shopdisc_same2 <- shopdisc[match(shopdisc_equake_same$id, shopdisc$id),]
-shopdisc_incr1 <- earthquake1[match(shopdisc_equake_incr$id, earthquake1$id),]
-shopdisc_incr2 <- shopdisc[match(shopdisc_equake_incr$id, shopdisc$id),]
-shopdisc_decr1 <- earthquake1[match(shopdisc_equake_decr$id, earthquake1$id),]
-shopdisc_decr2 <- shopdisc[match(shopdisc_equake_decr$id, shopdisc$id),]
+# shopdisc_same1 <- earthquake1[match(shopdisc_equake_same$id, earthquake1$id),]
+# shopdisc_same2 <- shopdisc[match(shopdisc_equake_same$id, shopdisc$id),]
+# shopdisc_incr1 <- earthquake1[match(shopdisc_equake_incr$id, earthquake1$id),]
+# shopdisc_incr2 <- shopdisc[match(shopdisc_equake_incr$id, shopdisc$id),]
+# shopdisc_decr1 <- earthquake1[match(shopdisc_equake_decr$id, earthquake1$id),]
+# shopdisc_decr2 <- shopdisc[match(shopdisc_equake_decr$id, shopdisc$id),]
 
 # Write to csv for analysis
-write.csv(shopdisc_same1, file.path(working_dir, "shopdisc_same1.csv"), row.names = FALSE)
-write.csv(shopdisc_same2, file.path(working_dir, "shopdisc_same2.csv"), row.names = FALSE)
-write.csv(shopdisc_incr1, file.path(working_dir, "shopdisc_incr1.csv"), row.names = FALSE)
-write.csv(shopdisc_incr2, file.path(working_dir, "shopdisc_incr2.csv"), row.names = FALSE)
-write.csv(shopdisc_decr1, file.path(working_dir, "shopdisc_decr1.csv"), row.names = FALSE)
-write.csv(shopdisc_decr2, file.path(working_dir, "shopdisc_decr2.csv"), row.names = FALSE)
+# write.csv(shopdisc_same1, file.path(working_dir, "shopdisc_same1.csv"), row.names = FALSE)
+# write.csv(shopdisc_same2, file.path(working_dir, "shopdisc_same2.csv"), row.names = FALSE)
+# write.csv(shopdisc_incr1, file.path(working_dir, "shopdisc_incr1.csv"), row.names = FALSE)
+# write.csv(shopdisc_incr2, file.path(working_dir, "shopdisc_incr2.csv"), row.names = FALSE)
+# write.csv(shopdisc_decr1, file.path(working_dir, "shopdisc_decr1.csv"), row.names = FALSE)
+# write.csv(shopdisc_decr2, file.path(working_dir, "shopdisc_decr2.csv"), row.names = FALSE)
 
