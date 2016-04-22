@@ -113,6 +113,8 @@ metrics19_count$percentage <- round(((metrics19_count$count / n_19) * 100),2)
 # Remove metric_count rows
 metrics19_count <- metrics19_count[!(metrics19_count$metric == "metric_count"),]
 
+# Remove affective rows
+metrics19_count <- metrics19_count[!(metrics19_count$metric == "affective"),]
 
 #==================================================
 # GRAPHS
@@ -134,9 +136,13 @@ ggplot(data=metrics19_count, aes(x=metric, y=percentage, fill=problem)) +
         axis.line=element_line(colour="black"), 
         panel.grid.major = element_blank(), 
         axis.ticks.x=element_blank(),
-        axis.text.y = element_text(size=12)) +
-  labs(fill='Problem', x='Metric\n', y='\n% of Students Identifying each Metric') + 
-  scale_fill_manual(labels=c("Earthquake", "Rainfall", "Shopping Discount"), values=c("black", "white", "#56B4E9"))
+        axis.text = element_text(size=12),
+        axis.title=element_text(size=14,face="bold")) +
+  labs(fill='Problem', x='Criteria\n', y='\n% of Students Identifying each Criteria') + 
+  scale_fill_manual(labels=c("Earthquake", "Rainfall", "Shopping Cart"), 
+                    values=c("black", "white", "#56B4E9"), 
+                    guide=guide_legend(reverse=TRUE))
+
 
 
 

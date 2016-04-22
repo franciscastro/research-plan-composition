@@ -29,8 +29,8 @@ working_dir <- "C:/Git Repositories/files"
 setwd(working_dir)#; getwd()
 
 # Set file names
-# file_name1 <- "coding-2102-datasmooth.csv"
-file_name2 <- "coding-19-datasmooth.csv"
+file_name1 <- "coding-2102-datasmooth.csv"
+# file_name2 <- "coding-19-datasmooth.csv"
 
 
 #==================================================
@@ -38,8 +38,8 @@ file_name2 <- "coding-19-datasmooth.csv"
 #==================================================
 
 # Read file
-# coding_data1 <- read.csv(file_name1)
-coding_data1 <- read.csv(file_name2)
+coding_data1 <- read.csv(file_name1)
+# coding_data1 <- read.csv(file_name2)
 
 # Convert column types as needed
 coding_data1$School <- as.factor(coding_data1$School)

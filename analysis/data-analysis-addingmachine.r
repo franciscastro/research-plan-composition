@@ -71,6 +71,10 @@ setnames(bin_struct_count1, c("n"), c("Counts"))
 bin_count <- data.frame(count(clean_data1, Bin))
 setnames(bin_count, c("n"), c("Counts"))
 
+# Replace 'SingleLoop' and 'NestedLoop' factors for uniformity
+levels(bin_count$Bin)[levels(bin_count$Bin) == "SingleLoop"] <- "SingleTraversal"
+levels(bin_count$Bin)[levels(bin_count$Bin) == "NestedLoop"] <- "NestedTraversal"
+
 
 #==================================================
 # GRAPHS
@@ -91,11 +95,14 @@ g_bin_struct1 + geom_bar(aes(fill=Structure), stat = "identity") +
 # Graph number of occurrence per bin
 ggplot(data=bin_count, aes(x=Bin, y=Counts)) + 
   geom_bar(aes(fill=Bin), stat='identity') +
+  coord_flip() + 
   theme(legend.position='none', 
         axis.ticks.x=element_blank(), 
         panel.grid.major = element_blank(), 
-        axis.text.x=element_text(size=12)) +
-  geom_text(aes(label=Counts), vjust=1.5, color='white', fontface='bold', size=5) +
+        axis.text=element_text(size=12),
+        axis.title=element_text(size=14,face="bold"), 
+        aspect.ratio=0.4) +
+  geom_text(aes(label=Counts), hjust=1.5, color='white', fontface='bold', size=5) +
   scale_y_continuous(limits=c(0,10.5), expand=c(0,0), breaks = c(0,2,4,6,8,10)) + 
-  labs(x='\nPlan', y='Number of Students in each Plan Type\n')
+  labs(x='Plan\n', y='\nNumber of Students in each Plan Type')
 

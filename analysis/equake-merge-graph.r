@@ -135,6 +135,10 @@ dsmooth_bin_group_count$Percentage <- round(ifelse(dsmooth_bin_group_count$Study
 equake_bin_group_count <- equake_bin_group_count %>% expand(Bin, StudyGroup) %>% left_join(equake_bin_group_count)
 equake_bin_group_count <- replace_na(equake_bin_group_count, replace=list(Counts = 0, Percentage = 0))
 
+# Replace 'SingleTraverse' and 'NestedTraverse' factors for uniformity
+levels(equake_bin_group_count$Bin)[levels(equake_bin_group_count$Bin) == "SingleTraverse"] <- "SingleTraversal"
+levels(equake_bin_group_count$Bin)[levels(equake_bin_group_count$Bin) == "NestedTraverse"] <- "NestedTraversal"
+
 dsmooth_bin_group_count <- dsmooth_bin_group_count %>% expand(Bin, StudyGroup) %>% left_join(dsmooth_bin_group_count)
 dsmooth_bin_group_count <- replace_na(dsmooth_bin_group_count, replace=list(Counts = 0, Percentage = 0))
 
@@ -161,9 +165,12 @@ ggplot(data=equake_bin_group_count, aes(x=Bin, y=Percentage, fill=StudyGroup)) +
         axis.line=element_line(colour="black"), 
         panel.grid.major = element_blank(), 
         axis.ticks.x=element_blank(),
-        axis.text.y = element_text(size=12)) +
+        axis.text = element_text(size=12),
+        axis.title=element_text(size=14,face="bold")) +
   labs(fill='Study Group', x='\nPlan', y='\n% of Solutions in each Plan Type') + 
-  scale_fill_manual(labels=c("CrsBnvc", "CrsBexp", "CrsA"), values=c("black", "white", "#56B4E9"))
+  scale_fill_manual(labels=c("CrsBnvc", "CrsBexp", "CrsA"), 
+                    values=c("black", "white", "#56B4E9"), 
+                    guide=guide_legend(reverse=TRUE))
 
 # DATASMOOTH
 ggplot(data=dsmooth_bin_group_count, aes(x=Bin, y=Percentage, fill=StudyGroup)) + 
@@ -181,8 +188,11 @@ ggplot(data=dsmooth_bin_group_count, aes(x=Bin, y=Percentage, fill=StudyGroup)) 
         axis.line=element_line(colour="black"), 
         panel.grid.major = element_blank(), 
         axis.ticks.x=element_blank(),
-        axis.text.y=element_text(size=12)) +
+        axis.text=element_text(size=12),
+        axis.title=element_text(size=14,face="bold")) +
   labs(fill='Study Group', x='\nPlan', y='\n% of Solutions in each Plan Type') + 
-  scale_fill_manual(labels=c("CrsBnvc", "CrsBexp", "CrsA"), values=c("black", "white", "#56B4E9"))
+  scale_fill_manual(labels=c("CrsBnvc", "CrsBexp", "CrsA"), 
+                    values=c("black", "white", "#56B4E9"), 
+                    guide=guide_legend(reverse=TRUE))
 
 
